@@ -1,4 +1,5 @@
 #include "ofMain.h"
+#include "tile.h"
 
 #include <vector>
 
@@ -6,7 +7,6 @@
 class Board
 {
 public:
-	class Tile;
 
 	Board();
 	~Board();
