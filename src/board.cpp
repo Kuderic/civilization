@@ -1,12 +1,10 @@
 #include "board.h"
 
 
-
-board::board()
+Board::Board()
 {
 }
 
-
-board::~board()
+Board::~Board()
 {
 }

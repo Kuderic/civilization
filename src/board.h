@@ -1,8 +1,20 @@
+#include "ofMain.h"
+
+#include <vector>
+
 #pragma once
-class board
+class Board
 {
 public:
-	board();
-	~board();
+	class Tile;
+
+	Board();
+	~Board();
+
+	std::vector<Tile> tiles;
+
+	void setup();
+	void update();
+	void draw();
 };
 
