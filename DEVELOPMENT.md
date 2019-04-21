@@ -30,7 +30,7 @@ ofDrawRectangle(rect.x, rect.y, rect.width, rect.height);
 ## Week Two
 
 ### Setting up the Project
-* Used oF project generator to create visual studio project
+* Used openFrameworks project generator to create visual studio project
 * Linked local project to github repository
 * Set up catch2 testing
 * Set up a way to switch between running unit tests and running actual program
@@ -40,8 +40,13 @@ ofDrawRectangle(rect.x, rect.y, rect.width, rect.height);
 * Class to hold all tiles in the game
 #### Tile Class
 * Has a position
+* Has a pointer to an ofImage object that is drawn when draw() is called
 * Acts as a node with edges to neighboring tiles
 * Alternate methods for getting neighboring tiles:
 	* Using a 2-D vector in Board class and getting adjacent tiles in vector
 	* Getting adjacent tiles by position since every tiles' position is stored
 	* Ultimately a runtime / design choice
+I didn't run into any issues initially when making my Board and Tile classes. However, when 
+I tried to use an image for my tiles I had issues loading my tile image. I eventually figured out
+that even though my application runs from the bin folder, it looks in bin/data for files.
+Because of this, I had to go an extra directory up to access my resource folder (../../resources/tile.png).
