@@ -8,12 +8,27 @@ Board::~Board()
 {
 }
 
-void Board::setup() {
-	for (int i = 0; i < 5; i++) {
-		ofPoint point = ofPoint(10 * i, 0, 0);
-		Tile new_tile = Tile(point, 10, 10);
+void Board::setup(int numXTiles, int numYTiles) {
+	//Load image files
+	grass_tile_1.load("../../resources/grass_tile_1.png");
+	
+	int win_width = ofGetWindowWidth();
+	int win_height = ofGetWindowHeight();
 
-		tiles.push_back(new_tile);
+	for (int i = 0; i < numXTiles; i++) {
+		for (int j = 0; j < numXTiles; j++) {
+
+			int tile_width = win_width / numXTiles;
+			int tile_height = win_height / numYTiles;
+
+			int x = tile_width * i;
+			int y = tile_height * j;
+
+			ofPoint point = ofPoint(x, y, 0);
+			Tile new_tile = Tile(point, tile_width, tile_height, &grass_tile_1);
+
+			tiles.push_back(new_tile);
+		}
 	}
 }
 

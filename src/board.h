@@ -13,8 +13,11 @@ public:
 
 	std::vector<Tile> tiles;
 
-	void setup();
+	void setup(int numXTiles, int numYTiles);
 	void update();
 	void draw();
+
+private:
+	ofImage grass_tile_1;
 };
 
