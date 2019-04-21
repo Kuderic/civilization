@@ -29,7 +29,7 @@ ofDrawRectangle(rect.x, rect.y, rect.width, rect.height);
 ```
 ## Week Two
 
-### Setting up the Project
+### 4/20/19 - Setting up the Project
 * Used openFrameworks project generator to create visual studio project
 * Linked local project to github repository
 * Set up catch2 testing
@@ -46,6 +46,7 @@ ofDrawRectangle(rect.x, rect.y, rect.width, rect.height);
 	* Using a 2-D vector in Board class and getting adjacent tiles in vector
 	* Getting adjacent tiles by position since every tiles' position is stored
 	* Ultimately a runtime / design choice
+
 I didn't run into any issues initially when making my Board and Tile classes. However, when 
 I tried to use an image for my tiles I had issues loading my tile image. I eventually figured out
 that even though my application runs from the bin folder, it looks in bin/data for files.
