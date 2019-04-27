@@ -17,7 +17,7 @@ const Tile& Board::GetTileAt(int x, int y) {
 
 void Board::setup() {
 	//Load image files
-	grass_tile_1_.load("../../resources/grass_tile_3.png");
+	grass_tile_1_.load("../../resources/grass_tile_1.png");
 	
 	int win_width = ofGetWindowWidth();
 	int win_height = ofGetWindowHeight();

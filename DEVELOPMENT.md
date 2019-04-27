@@ -54,8 +54,28 @@ Because of this, I had to go an extra directory up to access my actual resources
 (i.e. `../../resources/tile.png`).
 
 ### 4/25/19 - Small Changes to Base Classes
-I changed the Board class to use a 2-D std::array to store tiles and added constants
-kBoardWidth and kBoardHeight.
-A 2-D array helps with implementing methods and pathing algorithms.
-I also made tiles_ and position_ private variables of their respective classes.
-I renamed my class variables so that they now end with an underscore, adhering to Google's C++ style guide.
+* Changed the Board class tiles_ variable to use a 2-D array
+	* A 2-D array helps with implementing methods and pathing algorithms.
+* Added kBoardWidth and kBoardHeight constants to Board class
+* Made tiles_ and position_ private variables of their respective classes.
+* Renamed class variables so that they now end with an underscore, adhering to Google's C++ style guide.
+* Added getters for Board and Tile
+
+### 4/26/19 - Implementing Walls and Floors
+Checklist of what I plan to accomplish today. 
+
+[ ] Add wall and floor to Tile class
+	* Each tile may contain a floor and wall
+	* Wall will be drawn first if it exists. Otherwise floor is drawn
+[ ] Implement base Wall class
+	* Walls restrict movement and will be mineable in the future
+	* Will be the parent class for different types of walls:
+		* i.e. stone, dirt, wood
+[ ] Implement base Floor class
+	* Likely will just contain an image, but is good for future features
+	* Will be the parent class for different types of floors:
+		* i.e. stone, dirt, wood
+	* Could affect walk speed of colonists
+[ ] Create different types of floors and walls
+	* Will have different images
+[ ] Try to only draw outermost wall layer
