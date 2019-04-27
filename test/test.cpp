@@ -89,3 +89,25 @@ TEST_CASE("Floor GetType") {
 
 	REQUIRE(grass.GetType() == Floor::Type::GRASS);
 }
+
+
+//========================================
+// Wall Class Tests
+//========================================
+
+TEST_CASE("Floor Default Constructor") {
+	Wall Wall;
+	REQUIRE(Wall.GetType() == Wall::Type::STONE_BRICK);
+}
+
+TEST_CASE("Wall Type Constructor") {
+	Wall wood(Wall::Type::WOOD_PLANKS);
+
+	REQUIRE(wood.GetType() == Wall::Type::WOOD_PLANKS);
+}
+
+TEST_CASE("Wall GetType") {
+	Wall wood(Wall::Type::WOOD_PLANKS);
+
+	REQUIRE(wood.GetType() == Wall::Type::WOOD_PLANKS);
+}

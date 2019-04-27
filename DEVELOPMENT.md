@@ -64,10 +64,10 @@ Because of this, I had to go an extra directory up to access my actual resources
 ### 4/26/19 - Implementing Walls and Floors
 Checklist of what I plan to accomplish today. 
 
-- [ ] Add wall and floor to Tile class
+- [x] Add wall and floor to Tile class
 	* Each tile may contain a floor and wall
 	* Wall will be drawn first if it exists. Otherwise floor is drawn
-- [ ] Implement Wall class
+- [x] Implement Wall class
 	* Walls restrict movement and will be mineable
 	* Will have different types: i.e. stone, dirt, wood
 - [x] Implement Floor class

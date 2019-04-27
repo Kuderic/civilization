@@ -42,7 +42,6 @@ const ofImage* Floor::GetImage() const {
 }
 
 void Floor::LoadTextures() {
-
 	//Load image files
 	grass_floor_1_.load("../../resources/grass_floor_1.png");
 	grass_floor_2_.load("../../resources/grass_floor_2.png");
@@ -52,8 +51,8 @@ void Floor::LoadTextures() {
 }
 
 //Define static variables
-ofImage Floor::grass_floor_1_;
-ofImage Floor::grass_floor_2_;
-ofImage Floor::grass_floor_3_;
-ofImage Floor::stone_floor_1_;
-ofImage Floor::stone_floor_2_;
+ofImage grass_floor_1_;
+ofImage grass_floor_2_;
+ofImage grass_floor_3_;
+ofImage stone_floor_1_;
+ofImage stone_floor_2_;

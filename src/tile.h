@@ -1,5 +1,6 @@
 #include "ofMain.h"
 #include "floor.h"
+#include "wall.h"
 
 #pragma once
 class Tile
@@ -27,4 +28,5 @@ private:
 	int height_;
 	
 	Floor floor_;
+	Wall wall_;
 };
