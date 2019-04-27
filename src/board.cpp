@@ -19,26 +19,26 @@ void Board::setup() {
 }
 
 void Board::draw() {
-	for (int i = 0; i < tiles_.size(); i++) {
-		for (int j = 0; j < tiles_[0].size(); j++) {
-			tiles_[i][j].draw();
+	//Calculate the width and height each tile should be drawn with
+	int tile_width = ofGetWindowWidth() / kBoardWidth;
+	int tile_height = ofGetWindowHeight() / kBoardHeight;
+
+	for (int x = 0; x < tiles_.size(); x++) {
+		for (int y = 0; y < tiles_[0].size(); y++) {
+			//Calculate the pixel position of each tile
+			int pixel_x = tile_width * x;
+			int pixel_y = tile_height * y;
+
+			tiles_[x][y].draw(pixel_x, pixel_y, tile_width, tile_height);
 		}
 	}
 }
 
 void Board::GenerateTiles() {
 	//Generate a kBoardWidth by kBoardHeight sized tile board
-	int tile_width = ofGetWindowWidth() / kBoardWidth;
-	int tile_height = ofGetWindowHeight() / kBoardHeight;
-
 	for (int i = 0; i < kBoardWidth; i++) {
 		for (int j = 0; j < kBoardHeight; j++) {
-			int x = tile_width * i;
-			int y = tile_height * j;
-
-			ofPoint point = ofPoint(x, y, 0);
-			Tile new_tile = Tile(point, tile_width, tile_height);
-
+			Tile new_tile = Tile();
 			tiles_[i][j] = new_tile;
 		}
 	}

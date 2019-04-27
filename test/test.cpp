@@ -6,12 +6,6 @@
 // Board Class Tests
 //========================================
 
-TEST_CASE("Board Default Constructor") {
-	ofSetupOpenGL(1600, 1200, OF_WINDOW);
-
-	REQUIRE(0 == 0);
-}
-
 TEST_CASE("Board setup()") {
 	ofSetupOpenGL(1600, 1200, OF_WINDOW);
 	Board board;
@@ -26,15 +20,8 @@ TEST_CASE("Board GetTileAt()") {
 	Board board;
 	board.setup();
 
-	int tile_width = ofGetWindowWidth() / Board::kBoardWidth;
-	int tile_height = ofGetWindowHeight() / Board::kBoardHeight;
-
-	int x = tile_width * 1;
-	int y = tile_height * 3;
-
-	const Tile& tile = board.GetTileAt(1, 3);
-	REQUIRE(tile.GetPosition().x == x);
-	REQUIRE(tile.GetPosition().y == y);
+	const Tile& tile = board.GetTileAt(0, 0);
+	REQUIRE(tile.GetFloor().GetType() == Floor::Type::GRASS);
 }
 
 
@@ -44,26 +31,31 @@ TEST_CASE("Board GetTileAt()") {
 
 TEST_CASE("Tile Default Constructor") {
 	Tile tile;
-	REQUIRE(tile.GetPosition().x == 0);
+	REQUIRE(tile.GetFloor().GetType() == Floor::Type::GRASS);
 }
 
-TEST_CASE("Tile GetPosition()") {
-	ofPoint point = ofPoint(10, 10, 0);
-
-	Tile tile = Tile(point, 30, 40);
-
-	REQUIRE(tile.GetPosition() == point);
+TEST_CASE("Tile GetFloor()") {
+	Tile tile;
+	REQUIRE(tile.GetFloor().GetType() == Floor::Type::GRASS);
 }
 
-TEST_CASE("Tile Specific Constructor") {
-	ofPoint point = ofPoint(10, 10, 0);
+TEST_CASE("Tile GetWall()") {
+	Tile tile;
+	REQUIRE(tile.GetWall().GetType() == Wall::Type::EMPTY);
+}
 
-	Tile tile = Tile(point, 30, 40);
+TEST_CASE("Tile SetFloor()") {
+	Tile tile;
+	tile.SetFloor(Floor(Floor::Type::STONE));
 
-	REQUIRE(tile.GetPosition() == point);
+	REQUIRE(tile.GetFloor().GetType() == Floor::Type::STONE);
+}
 
-	REQUIRE(tile.GetWidth() == 30);
-	REQUIRE(tile.GetHeight() == 40);
+TEST_CASE("Tile SetWall()") {
+	Tile tile;
+	tile.SetWall(Wall(Wall::Type::STONE_BRICK));
+
+	REQUIRE(tile.GetWall().GetType() == Wall::Type::STONE_BRICK);
 }
 
 

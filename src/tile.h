@@ -7,26 +7,16 @@ class Tile
 {
 public:
 	Tile();
-	Tile(ofPoint point, int width, int height);
 
-	int GetWidth() const;
-	int GetHeight() const;
-	const ofPoint& GetPosition() const;
+	const Floor& GetFloor() const;
+	const Wall& GetWall() const;
 
 	void SetFloor(const Floor& floor);
 	void SetWall(const Wall& wall);
 
-	void setup();
-	void update();
-	void draw();
+	void draw(int x, int y, int width, int height);
 
-private:
-	//ofPoint is another name for the 3d vector class from the openFrameworks math library
-	ofPoint position_;
-
-	int width_;
-	int height_;
-	
+private:	
 	Floor floor_;
 	Wall wall_;
 };

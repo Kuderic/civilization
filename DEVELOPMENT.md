@@ -112,7 +112,10 @@ While making the Colonist class, I ran into the dilemma of how I should keep tra
 Should they be stored in ofApp, Board, or in Tile? I decided to store them in Board because a Board
 is made up entities and tiles but a tile isn't necessarily made up of an entity (although they are drawn
 at the same position). To track entities as part of the Board class, I now need to change
-how I keep track of my tiles (x, y) pixel positions as well as their (x, y) position in relation to the board
-so that it is easily consistent with my colonist class. To do this, I will be storing all tile and entity positions
-such that (x, y) represents their position in terms of tiles rather than pixels.
-I will then calculate their positions and image dimensions in pixels when they are drawn().
+how I keep track of my tiles positions in terms of pixels (for drawing them)
+as well as their position in position on the board (in relation to other tiles)
+so that it is consistent with how I store entity positions.
+To do this, I will be storing all tile and entity positions
+such that (x, y) represents their position in terms of each other
+(e.g. (1, 0) means the tile in the top row, second from the left).
+I will then calculate all pixel positions and dimensions when drawn() is called.
