@@ -4,13 +4,11 @@
 class Tile
 {
 public:
+
 	Tile();
 	Tile(ofPoint point, int width, int height, ofImage* image);
 
-	~Tile();
-
-	//ofPoint is another name for a 3d vector in the openFrameworks math library
-	ofPoint position;
+	~Tile(); //is this necesasry lol
 
 	int GetWidth();
 	int GetHeight();
@@ -20,8 +18,11 @@ public:
 	void draw();
 
 private:
-	int width;
-	int height;
-	ofImage* image;
+	//ofPoint is another name for the 3d vector class from the openFrameworks math library
+	ofPoint position_;
+
+	int width_;
+	int height_;
+	ofImage* image_;
 };
 

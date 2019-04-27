@@ -7,17 +7,19 @@
 class Board
 {
 public:
+	//Board dimensions when setup
+	static const int kBoardWidth = 20;
+	static const int kBoardHeight = 15;
 
-	Board();
-	~Board();
+	Board(); // Do we need this? can we combine with setup? should prob have setup do complicated stuff
+	~Board(); // Do we need this?
 
-	std::vector<Tile> tiles;
-
-	void setup(int numXTiles, int numYTiles);
+	void setup();
 	void update();
 	void draw();
 
 private:
-	ofImage grass_tile_1;
+	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_; //2-D vector of all Tiles
+	ofImage grass_tile_1_;
 };
 

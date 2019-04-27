@@ -2,8 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	//Create a 20x20 tile board
-	board.setup(20, 15);
+	//Board dimensions can be modified in board.h
+	board.setup();
 }
 
 //--------------------------------------------------------------
@@ -13,7 +13,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	//ofBackground(ofColor::black);
+	ofBackground(ofColor::black);
 	board.draw();
 }
 

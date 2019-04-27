@@ -49,5 +49,13 @@ ofDrawRectangle(rect.x, rect.y, rect.width, rect.height);
 
 I didn't run into any issues initially when making my Board and Tile classes. However, when 
 I tried to use an image for my tiles I had issues loading my tile image. I eventually figured out
-that even though my application runs from the bin folder, it looks in bin/data for files.
-Because of this, I had to go an extra directory up to access my resource folder (../../resources/tile.png).
+that even though my application runs from the bin folder, openFramworks classeslooks in bin/data for resources files.
+Because of this, I had to go an extra directory up to access my actual resources folder
+(i.e. `../../resources/tile.png`).
+
+### 4/25/19 - Small Changes to Base Classes
+I changed the Board class to use a 2-D std::array to store tiles and added constants
+kBoardWidth and kBoardHeight.
+A 2-D array helps with implementing methods and pathing algorithms.
+I also made tiles_ and position_ private variables of their respective classes.
+I renamed my class variables so that they now end with an underscore, adhering to Google's C++ style guide.

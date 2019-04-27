@@ -5,10 +5,10 @@ Tile::Tile()
 }
 
 Tile::Tile(ofPoint point, int width, int height, ofImage* image) {
-	this->position = point;
-	this->width = width;
-	this->height = height;
-	this->image = image;
+	this->position_ = point;
+	this->width_ = width;
+	this->height_ = height;
+	this->image_ = image;
 }
 
 Tile::~Tile()
@@ -16,13 +16,13 @@ Tile::~Tile()
 }
 
 int Tile::GetWidth() {
-	return width;
+	return width_;
 }
 
 int Tile::GetHeight() {
-	return height;
+	return height_;
 }
 
 void Tile::draw() {
-	image->draw(position.x, position.y, width, height);
+	image_->draw(position_.x, position_.y, width_, height_);
 }
