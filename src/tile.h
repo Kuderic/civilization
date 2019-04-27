@@ -13,6 +13,8 @@ public:
 	int GetHeight() const;
 	const ofPoint& GetPosition() const;
 
+	void SetFloor(const Floor& floor);
+
 	void setup();
 	void update();
 	void draw();
@@ -24,5 +26,5 @@ private:
 	int width_;
 	int height_;
 	
-	Floor floor;
+	Floor floor_;
 };

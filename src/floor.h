@@ -17,7 +17,7 @@ public:
 	static void LoadTextures();
 
 private:
-	static ofImage* image_;
+	ofImage* image_;
 	Type type_;
 
 	//Images for floor textures

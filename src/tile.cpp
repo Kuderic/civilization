@@ -25,6 +25,10 @@ int Tile::GetHeight() const {
 	return height_;
 }
 
+void Tile::SetFloor(const Floor& floor) {
+	floor_ = floor;
+}
+
 void Tile::draw() {
-	floor.GetImage()->draw(position_.x, position_.y, width_, height_);
+	floor_.GetImage()->draw(position_.x, position_.y, width_, height_);
 }

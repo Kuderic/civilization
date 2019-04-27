@@ -28,6 +28,7 @@ void Board::setup() {
 			
 			ofPoint point = ofPoint(x, y, 0);
 			Tile new_tile = Tile(point, tile_width, tile_height);
+			new_tile.SetFloor(Floor(Floor::Type::GRASS));
 
 			tiles_[i][j] = new_tile;
 		}
