@@ -119,3 +119,6 @@ To do this, I will be storing all tile and entity positions
 such that (x, y) represents their position in terms of each other
 (e.g. (1, 0) means the tile in the top row, second from the left).
 I will then calculate all pixel positions and dimensions when drawn() is called.
+
+I ended up making a parent class Entity that holds Colonist. Entity can be extended
+to include other entities such as animals and enemies in the future.

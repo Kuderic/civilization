@@ -1,15 +1,16 @@
 #include "ofMain.h"
+#include "entity.h"
 #pragma once
-class Colonist
+class Colonist : public Entity
 {
 public:
 	Colonist();
+	Colonist(const ofPoint position);
 
-	const ofImage* GetImage() const;
 	static void LoadTextures();
 
-private:
-	ofImage* image_;
+	void update();
 
+private:
 	static ofImage dog_1;
 };
