@@ -26,13 +26,16 @@ public:
 private:
 	//Generate a 5x5 stone block in setup(). Replace with generative function
 	static const int kStoneGenWidth = 5;
+	static const int kNumColonists = 3;
 
-	std::vector<Entity> entities;
+	std::vector<Entity> entities_;
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_; //2-D vector of all Tiles
 
 	void GenerateTiles();
 	//Can make the below into a function which takes Floor::Type and a generative function
 	void CreateGrass();
 	void CreateStone();
+
+	void CreateColonists();
 };
 

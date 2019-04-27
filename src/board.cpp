@@ -16,6 +16,8 @@ void Board::setup() {
 	GenerateTiles();
 	CreateGrass();
 	CreateStone();
+
+	CreateColonists();
 }
 
 void Board::draw() {
@@ -23,6 +25,7 @@ void Board::draw() {
 	int tile_width = ofGetWindowWidth() / kBoardWidth;
 	int tile_height = ofGetWindowHeight() / kBoardHeight;
 
+	//Draw tiles
 	for (int x = 0; x < tiles_.size(); x++) {
 		for (int y = 0; y < tiles_[0].size(); y++) {
 			//Calculate the pixel position of each tile
@@ -31,6 +34,21 @@ void Board::draw() {
 
 			tiles_[x][y].draw(pixel_x, pixel_y, tile_width, tile_height);
 		}
+	}
+
+	//Draw entities
+	for (int i = 0; i < entities_.size(); i++) {
+		int pixel_x = tile_width * entities_[i].GetPosition().x;
+		int pixel_y = tile_height * entities_[i].GetPosition().y;
+
+		entities_[i].draw(pixel_x, pixel_y, tile_width, tile_height);
+	}
+}
+
+void Board::update() {
+	//Call update for each entity
+	for (int i = 0; i < entities_.size(); i++) {
+		entities_[i].update();
 	}
 }
 
@@ -60,6 +78,13 @@ void Board::CreateStone() {
 			tiles_[i][j].SetFloor(Floor(Floor::Type::STONE));
 			tiles_[i][j].SetWall(Wall(Wall::Type::COBBLESTONE));
 		}
+	}
+}
+
+void Board::CreateColonists() {
+	for (int i = 0; i < kNumColonists; i++) {
+		Colonist colonist = Colonist(ofPoint(i, 0, 0));
+		entities_.push_back(colonist);
 	}
 }
 
