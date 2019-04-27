@@ -9,7 +9,7 @@ public:
 	};
 
 	Floor();
-	Floor(Type);
+	Floor(const Type type);
 
 	Type GetType() const;
 	const ofImage* GetImage() const;

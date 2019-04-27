@@ -4,12 +4,25 @@ Floor::Floor() {
 	type_ = Type::GRASS;
 }
 
-Floor::Floor(Type type) {
+Floor::Floor(const Type type) {
 	type_ = type;
 
-	//Grass
-	if (type == Type::GRASS) {
-		image_ = &grass_floor_3_;
+	int rand = ofRandom(0, 100);
+	//Assign floor texture
+	switch (type) {
+	case Type::GRASS:
+		if (rand < 60) {
+			image_ = &grass_floor_1_;
+		} else if (rand < 90) {
+			image_ = &grass_floor_2_;
+		} else if (rand < 100) {
+			image_ = &grass_floor_3_;
+		}
+		break;
+
+	case Type::STONE:
+		image_ = &stone_floor_1_;
+		break;
 	}
 }
 
