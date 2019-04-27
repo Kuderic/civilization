@@ -3,6 +3,14 @@
 Floor::Floor() {
 }
 
+Floor::Type Floor::GetType() const {
+	return type_;
+}
+
+const ofImage* Floor::GetImage() const {
+	return image_;
+}
+
 void Floor::LoadTextures() {
 	//Load image files
 	grass_floor_1_.load("../../resources/grass_tile_1.png");

@@ -11,12 +11,14 @@ public:
 	Floor();
 	Floor(Type);
 
-	Type GetType();
+	Type GetType() const;
+	const ofImage* GetImage() const;
 
 	static void LoadTextures();
 
 private:
 	static ofImage* image_;
+	Type type_;
 
 	//Images for floor textures
 	//Should I put this in a vector? Should I make it its own class?

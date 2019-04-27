@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include "../src/board.h"
 #include "../src/tile.h"
+#include "../src/floor.h"
 
 //========================================
 // Board Class Tests
@@ -50,21 +51,43 @@ TEST_CASE("Tile Default Constructor") {
 
 TEST_CASE("Tile GetPosition()") {
 	ofPoint point = ofPoint(10, 10, 0);
-	ofImage image;
-	image.load("../resources/grass_tile_1");
-	Tile tile = Tile(point, 30, 40, &image);
+
+	Tile tile = Tile(point, 30, 40);
 
 	REQUIRE(tile.GetPosition() == point);
 }
 
 TEST_CASE("Tile Specific Constructor") {
 	ofPoint point = ofPoint(10, 10, 0);
-	ofImage image;
-	image.load("../resources/grass_tile_1");
-	Tile tile = Tile(point, 30, 40, &image);
+
+	Tile tile = Tile(point, 30, 40);
 
 	REQUIRE(tile.GetPosition() == point);
 
 	REQUIRE(tile.GetWidth() == 30);
 	REQUIRE(tile.GetHeight() == 40);
+}
+
+
+//========================================
+// Floor Class Tests
+//========================================
+
+TEST_CASE("Floor Default Constructor") {
+	Floor floor;
+	REQUIRE(floor.GetType() == Floor::Type::GRASS);
+}
+
+TEST_CASE("Floor Type Constructor") {
+	Floor grass(Floor::Type::GRASS);
+	Floor stone(Floor::Type::STONE);
+
+	REQUIRE(grass.GetType() == Floor::Type::GRASS);
+	REQUIRE(stone.GetType() == Floor::Type::STONE);
+}
+
+TEST_CASE("Floor GetType") {
+	Floor grass(Floor::Type::GRASS);
+
+	REQUIRE(grass.GetType() == Floor::Type::GRASS);
 }
