@@ -23,7 +23,12 @@ Floor::Floor(const Type type) {
 		break;
 
 	case Type::STONE:
-		image_ = &stone_floor_1_;
+		if (rand < 60) {
+			image_ = &stone_floor_1_;
+		}
+		else if (rand < 100) {
+			image_ = &stone_floor_2_;
+		}
 		break;
 	}
 }
@@ -43,6 +48,7 @@ void Floor::LoadTextures() {
 	grass_floor_2_.load("../../resources/grass_floor_2.png");
 	grass_floor_3_.load("../../resources/grass_floor_3.png");
 	stone_floor_1_.load("../../resources/stone_floor_1.png");
+	stone_floor_2_.load("../../resources/stone_floor_2.png");
 }
 
 //Define static variables
@@ -50,3 +56,4 @@ ofImage Floor::grass_floor_1_;
 ofImage Floor::grass_floor_2_;
 ofImage Floor::grass_floor_3_;
 ofImage Floor::stone_floor_1_;
+ofImage Floor::stone_floor_2_;

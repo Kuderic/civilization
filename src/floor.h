@@ -26,4 +26,5 @@ private:
 	static ofImage grass_floor_2_;
 	static ofImage grass_floor_3_;
 	static ofImage stone_floor_1_;
+	static ofImage stone_floor_2_;
 };

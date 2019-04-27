@@ -21,6 +21,9 @@ public:
 	void draw();
 
 private:
+	//Generate a 5x5 stone block in setup(). Replace with generative function
+	static const int kStoneGenWidth = 5;
+
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_; //2-D vector of all Tiles
 
 	void GenerateTiles();

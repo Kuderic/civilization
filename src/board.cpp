@@ -55,8 +55,8 @@ void Board::CreateGrass() {
 
 void Board::CreateStone() {
 	//Generate stone in the bottom right corner (for now)
-	for (int i = kBoardWidth - 4; i < kBoardWidth; i++) {
-		for (int j = kBoardHeight - 3; j < kBoardHeight; j++) {
+	for (int i = kBoardWidth - kStoneGenWidth; i < kBoardWidth; i++) {
+		for (int j = kBoardHeight - kStoneGenWidth; j < kBoardHeight; j++) {
 			std::cout << "stone";
 			tiles_[i][j].SetFloor(Floor(Floor::Type::STONE));
 		}
