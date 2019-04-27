@@ -96,11 +96,11 @@ Today I want to implement basic colonists and gameplay features. To-do list:
 	* Will look like dogs because dogs are cute
 	* At first won't do anything until other actions are implemented
 	* Start with one colonist at first. Implement more later
-	- [ ] Idle movement
-		* Move in a random direction periodically
 	- [ ] User-controlled movement
 		* Let user control movement with arrow keys
 		* Tests wall collision (make sure colonists can't move onto a tile with a wall)
+	- [ ] Idle movement
+		* Move in a random direction periodically
 	- [ ] Dijkstra Algorithm
 		* Calculate the shortest path between nodes (tiles)
 		* Avoid walls

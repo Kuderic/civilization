@@ -1,5 +1,6 @@
 #include "ofMain.h"
 #include "tile.h"
+#include "colonist.h"
 
 #include <vector>
 

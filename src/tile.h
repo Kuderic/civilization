@@ -6,7 +6,6 @@
 class Tile
 {
 public:
-
 	Tile();
 	Tile(ofPoint point, int width, int height);
 
