@@ -27,6 +27,7 @@ ofRectangle rect = myFont.getStringBoundingBox(myString, x, y);
 ofSetColor(0xcccccc);
 ofDrawRectangle(rect.x, rect.y, rect.width, rect.height);
 ```
+
 ## Week Two
 
 ### 4/20/19 - Setting up the Project
@@ -53,6 +54,7 @@ that even though my application runs from the bin folder, openFramworks classesl
 Because of this, I had to go an extra directory up to access my actual resources folder
 (i.e. `../../resources/tile.png`).
 
+
 ### 4/25/19 - Small Changes to Base Classes
 * Changed the Board class tiles_ variable to use a 2-D array
 	* A 2-D array helps with implementing methods and pathing algorithms.
@@ -60,6 +62,7 @@ Because of this, I had to go an extra directory up to access my actual resources
 * Made tiles_ and position_ private variables of their respective classes.
 * Renamed class variables so that they now end with an underscore, adhering to Google's C++ style guide.
 * Added getters for Board and Tile
+
 
 ### 4/26/19 - Implementing Walls and Floors
 Checklist of what I plan to accomplish today. 
@@ -84,3 +87,23 @@ Loading an image has to be done once before it can be assigned to a floor.
 I've decided to make a static private variable (located in Floor) for each image,
 but other alternatives I came up with were storing them in a vector and creating a custom class
 for loading and referencing them.
+
+
+### 4/27/19 - Basic colonists and gameplay
+Today I want to implement basic colonists and gameplay features. To-do list:
+
+- [ ] Create Colonist class
+	* Will look like dogs because dogs are cute
+	* At first won't do anything until other actions are implemented
+	* Start with one colonist at first. Implement more later
+	- [ ] Idle movement
+		* Move in a random direction periodically
+	- [ ] User-controlled movement
+		* Let user control movement with arrow keys
+		* Tests wall collision (make sure colonists can't move onto a tile with a wall)
+	- [ ] Dijkstra Algorithm
+		* Calculate the shortest path between nodes (tiles)
+		* Avoid walls
+	- [ ] Directed movement
+		* Give a colonist a location to move to
+		* It will attempt to path there while avoiding walls
