@@ -21,6 +21,8 @@ public:
 	void update();
 	void draw();
 
+	void DeleteWallTest(int pixel_x, int pixel_y);
+
 private:
 	//Generate a 5x5 stone block in setup(). Replace with generative function
 	static const int kStoneGenWidth = 5;

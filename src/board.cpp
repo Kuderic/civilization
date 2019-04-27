@@ -62,3 +62,13 @@ void Board::CreateStone() {
 		}
 	}
 }
+
+//Click on a tile to delete the wall there
+void Board::DeleteWallTest(int pixel_x, int pixel_y) {
+	int tile_width = ofGetWindowWidth() / kBoardWidth;
+	int tile_height = ofGetWindowHeight() / kBoardHeight;
+	int x = pixel_x / tile_width;
+	int y = pixel_y / tile_height;
+
+	tiles_[x][y].SetWall(Wall(Wall::Type::EMPTY));
+}
