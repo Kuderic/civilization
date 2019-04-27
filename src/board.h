@@ -12,10 +12,9 @@ public:
 	static const int kBoardHeight = 15;
 
 	Board(); // Do we need this? can we combine with setup? should prob have setup do complicated stuff
-	~Board(); // Do we need this?
 
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
-	const Tile& GetTileAt(int x, int y);
+	const Tile& GetTileAt(int x, int y) const;
 
 	void setup();
 	void update();

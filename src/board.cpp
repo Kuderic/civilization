@@ -1,17 +1,13 @@
 #include "board.h"
 
-Board::Board()
-{
-}
-
-Board::~Board()
-{
+Board::Board() {
 }
 
 const std::array<std::array<Tile, Board::kBoardHeight>, Board::kBoardWidth>& Board::GetTiles() const {
 	return tiles_;
 }
-const Tile& Board::GetTileAt(int x, int y) {
+
+const Tile& Board::GetTileAt(int x, int y) const {
 	return tiles_[x][y];
 }
 

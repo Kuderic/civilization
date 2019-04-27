@@ -6,12 +6,10 @@ class Tile
 public:
 
 	Tile();
-	Tile(ofPoint point, int width, int height, ofImage* image);
+	Tile(ofPoint point, int width, int height, const ofImage* image);
 
-	~Tile(); //is this necesasry lol
-
-	int GetWidth();
-	int GetHeight();
+	int GetWidth() const;
+	int GetHeight() const;
 	const ofPoint& GetPosition() const;
 
 	void setup();
@@ -24,6 +22,5 @@ private:
 
 	int width_;
 	int height_;
-	ofImage* image_;
+	const ofImage* image_;
 };
-
