@@ -84,7 +84,7 @@ TEST_CASE("Floor Type Constructor") {
 	REQUIRE(stone.GetType() == Floor::Type::STONE);
 }
 
-TEST_CASE("Floor GetType") {
+TEST_CASE("Floor GetType()") {
 	Floor grass(Floor::Type::GRASS);
 
 	REQUIRE(grass.GetType() == Floor::Type::GRASS);
@@ -106,7 +106,7 @@ TEST_CASE("Wall Type Constructor") {
 	REQUIRE(wood.GetType() == Wall::Type::WOOD_PLANKS);
 }
 
-TEST_CASE("Wall GetType") {
+TEST_CASE("Wall GetType()") {
 	Wall wood(Wall::Type::WOOD_PLANKS);
 
 	REQUIRE(wood.GetType() == Wall::Type::WOOD_PLANKS);

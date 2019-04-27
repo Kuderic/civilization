@@ -15,6 +15,7 @@ public:
 	const ofPoint& GetPosition() const;
 
 	void SetFloor(const Floor& floor);
+	void SetWall(const Wall& wall);
 
 	void setup();
 	void update();

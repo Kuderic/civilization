@@ -1,11 +1,11 @@
 #include "tile.h"
 
-//needed for array<tile> to work
 Tile::Tile() {
 	position_ = ofPoint(0, 0, 0);
 	width_ = 0;
 	height_ = 0;
 	floor_ = Floor();
+	wall_ = Wall(Wall::Type::EMPTY);
 }
 
 Tile::Tile(ofPoint point, int width, int height) {
@@ -13,6 +13,7 @@ Tile::Tile(ofPoint point, int width, int height) {
 	this->width_ = width;
 	this->height_ = height;
 	floor_ = Floor();
+	wall_ = Wall(Wall::Type::EMPTY);
 }
 
 const ofPoint& Tile::GetPosition() const {
@@ -31,6 +32,15 @@ void Tile::SetFloor(const Floor& floor) {
 	floor_ = floor;
 }
 
+void Tile::SetWall(const Wall& wall) {
+	wall_ = wall;
+}
+
 void Tile::draw() {
-	floor_.GetImage()->draw(position_.x, position_.y, width_, height_);
+	//If wall exists, draw that instead of floor
+	if (wall_.GetImage()) {
+		wall_.GetImage()->draw(position_.x, position_.y, width_, height_);
+	} else {
+		floor_.GetImage()->draw(position_.x, position_.y, width_, height_);
+	}
 }

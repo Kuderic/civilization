@@ -4,6 +4,7 @@
 void ofApp::setup(){
 	ofSetFrameRate(60);
 	Floor::LoadTextures();
+	Wall::LoadTextures();
 
 	//Board dimensions can be modified in board.h
 	board.setup();

@@ -57,8 +57,8 @@ void Board::CreateStone() {
 	//Generate stone in the bottom right corner (for now)
 	for (int i = kBoardWidth - kStoneGenWidth; i < kBoardWidth; i++) {
 		for (int j = kBoardHeight - kStoneGenWidth; j < kBoardHeight; j++) {
-			std::cout << "stone";
 			tiles_[i][j].SetFloor(Floor(Floor::Type::STONE));
+			tiles_[i][j].SetWall(Wall(Wall::Type::COBBLESTONE));
 		}
 	}
 }

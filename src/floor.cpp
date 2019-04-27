@@ -23,7 +23,7 @@ Floor::Floor(const Type type) {
 		break;
 
 	case Type::STONE:
-		if (rand < 60) {
+		if (rand < 85) {
 			image_ = &stone_floor_1_;
 		}
 		else if (rand < 100) {
@@ -51,8 +51,8 @@ void Floor::LoadTextures() {
 }
 
 //Define static variables
-ofImage grass_floor_1_;
-ofImage grass_floor_2_;
-ofImage grass_floor_3_;
-ofImage stone_floor_1_;
-ofImage stone_floor_2_;
+ofImage Floor::grass_floor_1_;
+ofImage Floor::grass_floor_2_;
+ofImage Floor::grass_floor_3_;
+ofImage Floor::stone_floor_1_;
+ofImage Floor::stone_floor_2_;

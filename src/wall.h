@@ -4,7 +4,9 @@ class Wall
 {
 public:
 	enum class Type {
+		EMPTY,
 		WOOD_PLANKS,
+		COBBLESTONE,
 		STONE_BRICK
 	};
 
@@ -22,4 +24,5 @@ private:
 
 	static ofImage wood_planks_wall_1;
 	static ofImage stone_brick_wall_1;
+	static ofImage cobblestone_wall_1;
 };
