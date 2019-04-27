@@ -74,12 +74,12 @@ Checklist of what I plan to accomplish today.
 	* Likely will just contain an image, but is good for future features
 	* Will have different types: i.e. stone, dirt, wood
 	* Could affect walk speed of colonists
-- [ ] Create different types of floors and walls
+- [x] Create different types of floors and walls
 	* Can either be done with subclasses or an enum
 	* Will have different images and properties (time to dig)
 - [ ] Try to only draw outermost wall layer and leave rest black
 
-While working on the Floor class, I couldn't decide how I wan't to manage loading floor textures.
+While working on the Floor class, I couldn't decide how I wanted to manage loading floor textures.
 Loading an image has to be done once before it can be assigned to a floor.
 I've decided to make a static private variable (located in Floor) for each image,
 but other alternatives I came up with were storing them in a vector and creating a custom class

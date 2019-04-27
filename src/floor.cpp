@@ -2,6 +2,7 @@
 
 Floor::Floor() {
 	type_ = Type::GRASS;
+	image_ = &grass_floor_1_;
 }
 
 Floor::Floor(const Type type) {
@@ -10,6 +11,7 @@ Floor::Floor(const Type type) {
 	int rand = ofRandom(0, 100);
 	//Assign floor texture
 	switch (type) {
+
 	case Type::GRASS:
 		if (rand < 60) {
 			image_ = &grass_floor_1_;
@@ -25,7 +27,6 @@ Floor::Floor(const Type type) {
 		break;
 	}
 }
-
 
 Floor::Type Floor::GetType() const {
 	return type_;

@@ -2,15 +2,17 @@
 
 //needed for array<tile> to work
 Tile::Tile() {
-	this->position_ = ofPoint(0, 0, 0);
-	this->width_ = 0;
-	this->height_ = 0;
+	position_ = ofPoint(0, 0, 0);
+	width_ = 0;
+	height_ = 0;
+	floor_ = Floor();
 }
 
 Tile::Tile(ofPoint point, int width, int height) {
 	this->position_ = point;
 	this->width_ = width;
 	this->height_ = height;
+	floor_ = Floor();
 }
 
 const ofPoint& Tile::GetPosition() const {
