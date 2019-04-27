@@ -107,3 +107,12 @@ Today I want to implement basic colonists and gameplay features. To-do list:
 	- [ ] Directed movement
 		* Give a colonist a location to move to
 		* It will attempt to path there while avoiding walls
+
+While making the Colonist class, I ran into the dilemma of how I should keep track of my entities (colonists).
+Should they be stored in ofApp, Board, or in Tile? I decided to store them in Board because a Board
+is made up entities and tiles but a tile isn't necessarily made up of an entity (although they are drawn
+at the same position). To track entities as part of the Board class, I now need to change
+how I keep track of my tiles (x, y) pixel positions as well as their (x, y) position in relation to the board
+so that it is easily consistent with my colonist class. To do this, I will be storing all tile and entity positions
+such that (x, y) represents their position in terms of tiles rather than pixels.
+I will then calculate their positions and image dimensions in pixels when they are drawn().
