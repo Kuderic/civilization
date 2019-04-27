@@ -2,6 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	ofSetFrameRate(60);
+
 	//Board dimensions can be modified in board.h
 	board.setup();
 }

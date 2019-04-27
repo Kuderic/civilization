@@ -15,6 +15,10 @@ Tile::~Tile()
 {
 }
 
+const ofPoint& Tile::GetPosition() const {
+	return position_;
+}
+
 int Tile::GetWidth() {
 	return width_;
 }

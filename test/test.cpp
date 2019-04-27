@@ -8,15 +8,35 @@
 //========================================
 
 TEST_CASE("Board Default Constructor") {
+	ofSetupOpenGL(1600, 1200, OF_WINDOW);
+
 	REQUIRE(0 == 0);
 }
 
 TEST_CASE("Board setup()") {
+	ofSetupOpenGL(1600, 1200, OF_WINDOW);
 	Board board;
-	//board.setup(50, 50);
-	//REQUIRE(board.tiles.size() == 10);
+	board.setup();
+
+	REQUIRE(board.GetTiles().size() == Board::kBoardWidth);
+	REQUIRE(board.GetTiles()[0].size() == Board::kBoardHeight);
 }
 
+TEST_CASE("Board GetTileAt()") {
+	ofSetupOpenGL(1600, 1200, OF_WINDOW);
+	Board board;
+	board.setup();
+
+	int tile_width = ofGetWindowWidth() / Board::kBoardWidth;
+	int tile_height = ofGetWindowHeight() / Board::kBoardHeight;
+
+	int x = tile_width * 1;
+	int y = tile_height * 3;
+
+	const Tile& tile = board.GetTileAt(1, 3);
+	REQUIRE(tile.GetPosition().x == x);
+	REQUIRE(tile.GetPosition().y == y);
+}
 
 
 //========================================
@@ -24,24 +44,27 @@ TEST_CASE("Board setup()") {
 //========================================
 
 TEST_CASE("Tile Default Constructor") {
-	REQUIRE(0 == 0);
+	Tile tile;
+	REQUIRE(tile.GetPosition().x == 0);
 }
 
-TEST_CASE("Tile Position Constructor") {
+TEST_CASE("Tile GetPosition()") {
 	ofPoint point = ofPoint(10, 10, 0);
 	ofImage image;
 	image.load("../resources/grass_tile_1");
+	Tile tile = Tile(point, 30, 40, &image);
 
-	Tile new_tile = Tile(point, 30, 40, &image);
-
-	//REQUIRE(new_tile.position.x == 10);
-	//REQUIRE(new_tile.position.y == 10);
-	//REQUIRE(new_tile.position.z == 0);
-
-	REQUIRE(new_tile.GetWidth() == 30);
-	REQUIRE(new_tile.GetHeight() == 40);
+	REQUIRE(tile.GetPosition() == point);
 }
 
-TEST_CASE("Tile setup()") {
-	REQUIRE(0 == 0);
+TEST_CASE("Tile Specific Constructor") {
+	ofPoint point = ofPoint(10, 10, 0);
+	ofImage image;
+	image.load("../resources/grass_tile_1");
+	Tile tile = Tile(point, 30, 40, &image);
+
+	REQUIRE(tile.GetPosition() == point);
+
+	REQUIRE(tile.GetWidth() == 30);
+	REQUIRE(tile.GetHeight() == 40);
 }

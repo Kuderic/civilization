@@ -12,6 +12,7 @@ public:
 
 	int GetWidth();
 	int GetHeight();
+	const ofPoint& GetPosition() const;
 
 	void setup();
 	void update();

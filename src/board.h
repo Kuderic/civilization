@@ -14,6 +14,9 @@ public:
 	Board(); // Do we need this? can we combine with setup? should prob have setup do complicated stuff
 	~Board(); // Do we need this?
 
+	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
+	const Tile& GetTileAt(int x, int y);
+
 	void setup();
 	void update();
 	void draw();

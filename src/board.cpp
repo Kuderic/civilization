@@ -8,6 +8,13 @@ Board::~Board()
 {
 }
 
+const std::array<std::array<Tile, Board::kBoardHeight>, Board::kBoardWidth>& Board::GetTiles() const {
+	return tiles_;
+}
+const Tile& Board::GetTileAt(int x, int y) {
+	return tiles_[x][y];
+}
+
 void Board::setup() {
 	//Load image files
 	grass_tile_1_.load("../../resources/grass_tile_3.png");
