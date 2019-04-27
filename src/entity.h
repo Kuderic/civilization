@@ -13,8 +13,11 @@ public:
 	void SetPosition(int x, int y);
 
 	virtual void update();
+	void draw(int x, int y, int width, int height);
+
+protected:
+	ofImage* image_;
 
 private:
 	ofPoint position_;
-	ofImage* image_;
 };

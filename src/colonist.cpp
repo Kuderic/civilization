@@ -1,10 +1,13 @@
 #include "colonist.h"
 
 Colonist::Colonist() {
+	//Entity default constructor called automatically
+	image_ = &dog_1;
 }
 
-const ofImage* Colonist::GetImage() const {
-	return image_;
+Colonist::Colonist(const ofPoint position) : Entity(position) {
+	//Call superclass constructor passing in position
+	image_ = &dog_1;
 }
 
 void Colonist::LoadTextures() {
@@ -14,3 +17,7 @@ void Colonist::LoadTextures() {
 
 //Define static variables
 ofImage Colonist::dog_1;
+
+void Colonist::update() {
+	std::cout << "yeet" << std::endl;
+}

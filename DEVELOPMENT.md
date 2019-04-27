@@ -92,7 +92,7 @@ for loading and referencing them.
 ### 4/27/19 - Basic colonists and gameplay
 Today I want to implement basic colonists and gameplay features. To-do list:
 
-- [ ] Create Colonist class
+- [x] Create Colonist class
 	* Will look like dogs because dogs are cute
 	* At first won't do anything until other actions are implemented
 	* Start with one colonist at first. Implement more later
