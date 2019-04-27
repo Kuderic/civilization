@@ -64,18 +64,18 @@ Because of this, I had to go an extra directory up to access my actual resources
 ### 4/26/19 - Implementing Walls and Floors
 Checklist of what I plan to accomplish today. 
 
-[ ] Add wall and floor to Tile class
+- [ ] Add wall and floor to Tile class
 	* Each tile may contain a floor and wall
 	* Wall will be drawn first if it exists. Otherwise floor is drawn
-[ ] Implement base Wall class
+- [ ] Implement base Wall class
 	* Walls restrict movement and will be mineable in the future
 	* Will be the parent class for different types of walls:
 		* i.e. stone, dirt, wood
-[ ] Implement base Floor class
+- [ ] Implement base Floor class
 	* Likely will just contain an image, but is good for future features
 	* Will be the parent class for different types of floors:
 		* i.e. stone, dirt, wood
 	* Could affect walk speed of colonists
-[ ] Create different types of floors and walls
+- [ ] Create different types of floors and walls
 	* Will have different images
-[ ] Try to only draw outermost wall layer
+- [ ] Try to only draw outermost wall layer
