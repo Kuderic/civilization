@@ -1,4 +1,5 @@
 #include "ofMain.h"
+#include "floor.h"
 
 #pragma once
 class Tile
@@ -6,7 +7,7 @@ class Tile
 public:
 
 	Tile();
-	Tile(ofPoint point, int width, int height, const ofImage* image);
+	Tile(ofPoint point, int width, int height);
 
 	int GetWidth() const;
 	int GetHeight() const;
@@ -22,5 +23,6 @@ private:
 
 	int width_;
 	int height_;
-	const ofImage* image_;
+	
+	Floor floor;
 };

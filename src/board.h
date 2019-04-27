@@ -11,7 +11,7 @@ public:
 	static const int kBoardWidth = 20;
 	static const int kBoardHeight = 15;
 
-	Board(); // Do we need this? can we combine with setup? should prob have setup do complicated stuff
+	Board(); // Do we need this? don't we just call setup?
 
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
 	const Tile& GetTileAt(int x, int y) const;
@@ -22,6 +22,5 @@ public:
 
 private:
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_; //2-D vector of all Tiles
-	ofImage grass_tile_1_;
 };
 

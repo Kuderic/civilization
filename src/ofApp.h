@@ -2,9 +2,8 @@
 
 #include "ofMain.h"
 #include "board.h"
-#include "tile.h"
 
-class ofApp : public ofBaseApp{
+class ofApp : public ofBaseApp {
 
 public:
 	void setup();
@@ -25,6 +24,4 @@ public:
 		
 private:
 	Board board;
-
-	ofImage grass_tile_1;
 };

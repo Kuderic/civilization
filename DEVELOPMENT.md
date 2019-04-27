@@ -67,15 +67,20 @@ Checklist of what I plan to accomplish today.
 - [ ] Add wall and floor to Tile class
 	* Each tile may contain a floor and wall
 	* Wall will be drawn first if it exists. Otherwise floor is drawn
-- [ ] Implement base Wall class
-	* Walls restrict movement and will be mineable in the future
-	* Will be the parent class for different types of walls:
-		* i.e. stone, dirt, wood
-- [ ] Implement base Floor class
+- [ ] Implement Wall class
+	* Walls restrict movement and will be mineable
+	* Will have different types: i.e. stone, dirt, wood
+- [x] Implement Floor class
 	* Likely will just contain an image, but is good for future features
-	* Will be the parent class for different types of floors:
-		* i.e. stone, dirt, wood
+	* Will have different types: i.e. stone, dirt, wood
 	* Could affect walk speed of colonists
 - [ ] Create different types of floors and walls
-	* Will have different images
-- [ ] Try to only draw outermost wall layer
+	* Can either be done with subclasses or an enum
+	* Will have different images and properties (time to dig)
+- [ ] Try to only draw outermost wall layer and leave rest black
+
+While working on the Floor class, I couldn't decide how I wan't to manage loading floor textures.
+Loading an image has to be done once before it can be assigned to a floor.
+I've decided to make a static private variable (located in Floor) for each image,
+but other alternatives I came up with were storing them in a vector and creating a custom class
+for loading and referencing them.

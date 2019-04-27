@@ -7,11 +7,10 @@ Tile::Tile() {
 	this->height_ = 0;
 }
 
-Tile::Tile(ofPoint point, int width, int height, const ofImage* image) {
+Tile::Tile(ofPoint point, int width, int height) {
 	this->position_ = point;
 	this->width_ = width;
 	this->height_ = height;
-	this->image_ = image;
 }
 
 const ofPoint& Tile::GetPosition() const {

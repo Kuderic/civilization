@@ -11,10 +11,9 @@ const Tile& Board::GetTileAt(int x, int y) const {
 	return tiles_[x][y];
 }
 
+//Generate gameboard
 void Board::setup() {
-	//Load image files
-	grass_tile_1_.load("../../resources/grass_tile_1.png");
-	
+
 	int win_width = ofGetWindowWidth();
 	int win_height = ofGetWindowHeight();
 
@@ -28,7 +27,7 @@ void Board::setup() {
 			int y = tile_height * j;
 			
 			ofPoint point = ofPoint(x, y, 0);
-			Tile new_tile = Tile(point, tile_width, tile_height, &grass_tile_1_);
+			Tile new_tile = Tile(point, tile_width, tile_height);
 
 			tiles_[i][j] = new_tile;
 		}
