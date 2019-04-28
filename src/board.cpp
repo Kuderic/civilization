@@ -38,17 +38,17 @@ void Board::draw() {
 
 	//Draw entities
 	for (int i = 0; i < entities_.size(); i++) {
-		int pixel_x = tile_width * entities_[i].GetPosition().x;
-		int pixel_y = tile_height * entities_[i].GetPosition().y;
+		int pixel_x = tile_width * entities_[i]->GetPosition().x;
+		int pixel_y = tile_height * entities_[i]->GetPosition().y;
 
-		entities_[i].draw(pixel_x, pixel_y, tile_width, tile_height);
+		entities_[i]->draw(pixel_x, pixel_y, tile_width, tile_height);
 	}
 }
 
 void Board::update() {
 	//Call update for each entity
 	for (int i = 0; i < entities_.size(); i++) {
-		entities_[i].update();
+		entities_[i]->update();
 	}
 }
 
@@ -83,7 +83,7 @@ void Board::CreateStone() {
 
 void Board::CreateColonists() {
 	for (int i = 0; i < kNumColonists; i++) {
-		Colonist colonist = Colonist(ofPoint(i, 0, 0));
+		Colonist* colonist = new Colonist(ofPoint(i, 0, 0));
 		entities_.push_back(colonist);
 	}
 }

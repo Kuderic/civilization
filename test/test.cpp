@@ -109,36 +109,16 @@ TEST_CASE("Wall GetType()") {
 // Entity Class Tests
 //========================================
 
-TEST_CASE("Entity Constructor") {
-	Entity entity;
-	REQUIRE(entity.GetPosition() == ofPoint(0, 0, 0));
-}
-
-TEST_CASE("Entity GetPosition()") {
-	Entity entity(ofPoint(1, 2, 3));
-
-	REQUIRE(entity.GetPosition() == ofPoint(1, 2, 3));
-	REQUIRE(entity.GetPosition().x == 1);
-	REQUIRE(entity.GetPosition().y == 2);
-}
-
-TEST_CASE("Entity GetImage()") {
-	Entity entity;
-
-	//GetImage should return nullptr with default constructor
-	REQUIRE(entity.GetImage() == nullptr);
-}
-
-//Polymorphism tests
-TEST_CASE("Entity Colonist Poly") {
+//Entity is an abstract class, so I can only test it as a pointer/reference
+TEST_CASE("Entity Colonist Polymorphism") {
 	Colonist colonist = Colonist(ofPoint(2, 3, 0));
-	Entity entity = colonist;
+	Entity& entity = colonist;
 
 	REQUIRE(entity.GetPosition() == ofPoint(2, 3, 0));
 }
 
 TEST_CASE("Entity Colonist Poly Constructor") {
-	Entity entity = Colonist(ofPoint(2, 3, 0));
+	Entity& entity = Colonist(ofPoint(2, 3, 0));
 
 	REQUIRE(entity.GetPosition() == ofPoint(2, 3, 0));
 }
@@ -162,7 +142,6 @@ TEST_CASE("Colonist GetPosition()") {
 TEST_CASE("Colonist GetImage()") {
 	Colonist colonist;
 
-	//GetImage should NOT return nullptr with default constructor
-	//It is always a dog after all
+	//GetImage should never return nullptr
 	REQUIRE(colonist.GetImage() != nullptr);
 }

@@ -19,5 +19,6 @@ void Colonist::LoadTextures() {
 ofImage Colonist::dog_1;
 
 void Colonist::update() {
-	std::cout << "yeet" << std::endl;
+	position_.x = position_.x + 1;
+	position_.y = position_.y + 1;
 }

@@ -23,10 +23,6 @@ void Entity::SetPosition(int x, int y) {
 	position_.y = y;
 }
 
-void Entity::update() {
-	//this shouldn't do anything for Entity
-}
-
 void Entity::draw(int x, int y, int width, int height) {
 	image_->draw(x, y, width, height);
 }

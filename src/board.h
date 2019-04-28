@@ -28,7 +28,7 @@ private:
 	static const int kStoneGenWidth = 5;
 	static const int kNumColonists = 3;
 
-	std::vector<Entity> entities_;
+	std::vector<Entity*> entities_;
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_; //2-D vector of all Tiles
 
 	void GenerateTiles();
