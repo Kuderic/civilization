@@ -9,7 +9,7 @@ public:
 
 	static void LoadTextures();
 
-	void update();
+	TurnAction GetTurnAction(const Board& board);
 
 private:
 	static ofImage dog_1;

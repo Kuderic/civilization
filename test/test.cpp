@@ -145,3 +145,21 @@ TEST_CASE("Colonist GetImage()") {
 	//GetImage should never return nullptr
 	REQUIRE(colonist.GetImage() != nullptr);
 }
+
+
+//========================================
+// TurnAction Class Tests
+//========================================
+
+TEST_CASE("TurnAction Default Constructor") {
+	TurnAction turn_action;
+
+	REQUIRE(turn_action.action_ == Action::IDLE);
+}
+
+TEST_CASE("TurnAction Specific Constructor") {
+	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0));
+
+	REQUIRE(turn_action.action_ == Action::IDLE);
+	REQUIRE(turn_action.target_ == ofPoint(0, 0, 0));
+}

@@ -1,6 +1,8 @@
 #include "ofMain.h"
+#include "turn_action.h"
 #pragma once
 
+class Board;
 //This is an abstract class
 class Entity
 {
@@ -11,15 +13,16 @@ public:
 	const ofPoint GetPosition() const;
 	const ofImage* GetImage() const;
 
-	//Not sure what should be in charge of moving entities
-	//The entity itself, the board, or something else?
 	void SetPosition(int x, int y);
 
-	virtual void update() = 0;
+	//Pass in a reference to the current board so the entity can make an action
+	virtual TurnAction GetTurnAction(const Board& board) = 0;
+
 	void draw(int x, int y, int width, int height);
 
 protected:
 	ofImage* image_;
+private:
 	ofPoint position_;
 
 };

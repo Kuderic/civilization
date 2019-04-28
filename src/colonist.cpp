@@ -15,6 +15,10 @@ void Colonist::LoadTextures() {
 	dog_1.load("../../resources/dog_1.png");
 }
 
+TurnAction Colonist::GetTurnAction(const Board& board) {
+	return MOVE_RIGHT;
+}
+
 //Define static variables
 ofImage Colonist::dog_1;
 
