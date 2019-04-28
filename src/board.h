@@ -12,7 +12,7 @@ public:
 	static const int kBoardWidth = 20;
 	static const int kBoardHeight = 15;
 
-	Board(); // Do we need this? don't we just call setup?
+	Board();
 
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
 	const Tile& GetTileAt(int x, int y) const;

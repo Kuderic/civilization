@@ -1,16 +1,41 @@
 #include "ofMain.h"
 #pragma once
 
+class Entity;
 enum class Action {
 	IDLE,
-	MOVE
+	MOVE,
+	DIG
 };
 
 class TurnAction {
 public:
+	TurnAction();
+	TurnAction(const Action action, const ofPoint target, const Entity* owner);
+
+	const Entity* GetOwner() const;
+	Action GetAction() const;
+	ofPoint GetTarget() const;
+	int GetProgress() const;
+	int GetMaxProgress() const;
+	bool IsComplete() const;
+
+	//Increment amount will vary based on owner conditions
+	void IncrementProgress();
+	TurnAction& operator++();
+
+private:
+	const Entity* owner_;
+
 	Action action_;
 	ofPoint target_;
+	int progress_; //Increments each frame
+	int max_progress_; //Required to do action
 
-	TurnAction();
-	TurnAction(Action action, ofPoint target);
+	const static int kDefaultIncrement = 10;
+	//Max time for various actions
+	//Divide by 600 to get average seconds for each action
+	const static int kIdleTime = 50;
+	const static int kMoveTime = 500;
+	const static int kDigTime = 3000;
 };

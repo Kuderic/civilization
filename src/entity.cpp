@@ -3,24 +3,30 @@
 Entity::Entity() {
 	position_ = ofPoint(0, 0, 0);
 	image_ = nullptr;
+	turn_action_ = TurnAction();
 }
 
 Entity::Entity(const ofPoint position) {
 	position_ = position;
 	image_ = nullptr;
-}
-
-const ofImage* Entity::GetImage() const {
-	return image_;
+	turn_action_ = TurnAction();
 }
 
 const ofPoint Entity::GetPosition() const {
 	return position_;
 }
 
-void Entity::SetPosition(int x, int y) {
-	position_.x = x;
-	position_.y = y;
+const ofImage* Entity::GetImage() const {
+	return image_;
+}
+
+TurnAction& Entity::GetTurnAction() {
+	return turn_action_;
+}
+
+
+void Entity::SetPosition(const ofPoint position) {
+	position_ = position;
 }
 
 void Entity::draw(int x, int y, int width, int height) {

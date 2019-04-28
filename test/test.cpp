@@ -109,7 +109,7 @@ TEST_CASE("Wall GetType()") {
 // Entity Class Tests
 //========================================
 
-//Entity is an abstract class, so I can only test it as a pointer/reference
+//Entity is an abstract class, so I can only test it as a pointer/reference to a subclass
 TEST_CASE("Entity Colonist Polymorphism") {
 	Colonist colonist = Colonist(ofPoint(2, 3, 0));
 	Entity& entity = colonist;
@@ -146,6 +146,19 @@ TEST_CASE("Colonist GetImage()") {
 	REQUIRE(colonist.GetImage() != nullptr);
 }
 
+TEST_CASE("Colonist GetTurnAction()") {
+	Colonist colonist;
+
+	REQUIRE(colonist.GetTurnAction().GetAction() == Action::IDLE);
+}
+
+TEST_CASE("Colonist SetPosition()") {
+	Colonist colonist;
+	colonist.SetPosition(ofPoint(3, 5, 6));
+
+	REQUIRE(colonist.GetPosition() == ofPoint(3, 5, 6));
+}
+
 
 //========================================
 // TurnAction Class Tests
@@ -154,12 +167,61 @@ TEST_CASE("Colonist GetImage()") {
 TEST_CASE("TurnAction Default Constructor") {
 	TurnAction turn_action;
 
-	REQUIRE(turn_action.action_ == Action::IDLE);
+	REQUIRE(turn_action.GetAction() == Action::IDLE);
 }
 
 TEST_CASE("TurnAction Specific Constructor") {
-	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0));
+	Colonist colonist;
+	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
 
-	REQUIRE(turn_action.action_ == Action::IDLE);
-	REQUIRE(turn_action.target_ == ofPoint(0, 0, 0));
+	REQUIRE(turn_action.GetAction() == Action::IDLE);
+	REQUIRE(turn_action.GetTarget() == ofPoint(0, 0, 0));
+}
+
+TEST_CASE("TurnAction GetAction()") {
+	Colonist colonist;
+	TurnAction turn_action = TurnAction(Action::DIG, ofPoint(0, 0, 0), &colonist);
+
+	REQUIRE(turn_action.GetAction() == Action::DIG);
+}
+
+TEST_CASE("TurnAction GetTarget()") {
+	Colonist colonist;
+	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(1, 0, 0), &colonist);
+
+	REQUIRE(turn_action.GetTarget() == ofPoint(1, 0, 0));
+}
+
+TEST_CASE("TurnAction GetProgress()") {
+	Colonist colonist;
+	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+
+	REQUIRE(turn_action.GetProgress() == 0);
+}
+
+TEST_CASE("TurnAction IncrementProgress()") {
+	Colonist colonist;
+	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+	turn_action.IncrementProgress();
+
+	REQUIRE(turn_action.GetProgress() != 0);
+}
+
+TEST_CASE("TurnAction IncrementProgress() Past Max") {
+	Colonist colonist;
+	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+
+	for (int i = 0; i < 9999; i++) {
+		turn_action.IncrementProgress();
+	}
+
+	REQUIRE(turn_action.IsComplete());
+}
+
+TEST_CASE("TurnAction operator++") {
+	Colonist colonist;
+	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+	++turn_action;
+
+	REQUIRE(turn_action.GetProgress() != 0);
 }

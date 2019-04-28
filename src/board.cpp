@@ -36,7 +36,7 @@ void Board::draw() {
 		}
 	}
 
-	//Draw entities
+	//Draw entities after tiles
 	for (int i = 0; i < entities_.size(); i++) {
 		int pixel_x = tile_width * entities_[i]->GetPosition().x;
 		int pixel_y = tile_height * entities_[i]->GetPosition().y;
@@ -46,9 +46,22 @@ void Board::draw() {
 }
 
 void Board::update() {
-	//Call update for each entity
 	for (int i = 0; i < entities_.size(); i++) {
-		entities_[i]->update();
+		Entity& entity = *entities_[i];
+
+		//Give entity a reference to board so it can update its action
+		entity.UpdateTurnAction(*this);
+
+		TurnAction& action = entity.GetTurnAction();
+		/* Parse action for entity if done
+			Note: I handle parsing in Board because board is the only class that has access to everything
+			E.g. if action is digging a wall, board can remove the wall when action is complete*/
+		if (action.IsComplete()) {
+			switch (action.GetAction()) {
+			case Action::MOVE:
+				entity.SetPosition(action.GetTarget());
+			}
+		}
 	}
 }
 

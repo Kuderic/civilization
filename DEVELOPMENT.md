@@ -89,7 +89,7 @@ but other alternatives I came up with were storing them in a vector and creating
 for loading and referencing them.
 
 
-### 4/27/19 - Basic colonists and gameplay
+### 4/27/19 - Basic Colonists and Gameplay
 Today I want to implement basic colonists and gameplay features. To-do list:
 
 - [x] Create Colonist class
@@ -123,7 +123,7 @@ I will then calculate all pixel positions and dimensions when drawn() is called.
 I also ended up making a parent class Entity that holds Colonist. Entity can be extended
 to include other entities such as animals and enemies in the future.
 
-### 4/28/19 - Basic colonists and gameplay (Cont.)
+### 4/28/19 - Basic Colonists and Gameplay (Cont.)
 
 Today I am focusing on how I want to interface between my entities and the board and handle
 the processing of my entities turns.
@@ -132,14 +132,13 @@ such a way that remains loosely coupled so that my is program easily extendable.
 
 I have decided to have my entities read the board state each frame and then create and store a 
 TurnAction based on what they want to do. This TurnAction will then be parsed by the
-board (or some other parser class) to make sure that it is legal (extra safety measure).
-The parser will then call the correct public methods to achieve the TurnAction.
+board (or some other parser class) which will then call the correct public methods to achieve the action.
 e.g. Dig Wall East -> entity.AddExperience(Mining) && east_tile.RemoveWall()
 
 Furthermore, actions will take varying amounts of time. Since the game operates at
 60 frames per second, I will need to store a counter in TurnAction that keeps track of how
 many frames have passed for that given TurnAction.
-This also means that each frame when the Entity mayis asked to create a TurnAction,
+This also means that each frame when the Entity is asked to create a TurnAction,
 they won't create a new one if their current TurnAction is still what they want to do.
 e.g. TurnAction is Dig Wall which takes 120 frames (2 seconds). entity.GetTurnAction()
 will not alter TurnAction as long as the dig designation on the wall is not removed by the player.
