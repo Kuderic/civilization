@@ -160,3 +160,30 @@ One issue I ran into while making the Camera class was parsing my clicks to the 
 This is because now my mouse's coordinates didnt match up to the tile coordinates if
 my camera was not at (0, 0). I easily fixed this by adding the camera's position vector
 to the mouse position.
+
+### 4/29/19 - Basic Colonists and Gameplay (Cont.)
+
+Today I will try to finish up pathing algorithms for entities and start working
+on basic gameplay/adding more features.
+
+Also, I've come up with a way to only draw walls that are exposed to air.
+I just check each wall's neighboring tiles.
+If at least one neighbor has no wall, then I draw the wall.
+
+To-do list:
+- [IP] Try to only draw outermost wall layer and leave rest black
+- [x] Create Colonist class
+	* Will look like dogs because dogs are cute
+	* At first won't do anything until other actions are implemented
+	* Start with one colonist at first. Implement more later
+	- [ ] User-controlled movement
+		* Let user control movement with arrow keys
+		* Tests wall collision (make sure colonists can't move onto a tile with a wall)
+	- [ ] Idle movement
+		* Move in a random direction periodically if idle
+	- [ ] Dijkstra Algorithm
+		* Calculate the shortest path between nodes (tiles)
+		* Avoid walls
+	- [ ] Directed movement
+		* Give a colonist a location to move to
+		* It will attempt to path there while avoiding walls

@@ -48,8 +48,10 @@ void Board::update() {
 void Board::TileClicked(const ofPoint position) {
 	int x = position.x;
 	int y = position.y;
-	//For now, deletes wall
-	tiles_[x][y].SetWall(Wall(Wall::Type::EMPTY));
+	//Check that x, y is part of the board
+	if (x < kBoardWidth && y < kBoardHeight) {
+		tiles_[x][y].SetWall(Wall(Wall::Type::EMPTY));
+	}
 }
 
 void Board::GenerateTiles() {
