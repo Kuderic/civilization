@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
 #include "../src/board.h"
+#include "../src/camera.h"
 
 //========================================
 // Board Class Tests
@@ -224,4 +225,15 @@ TEST_CASE("TurnAction operator++") {
 	++turn_action;
 
 	REQUIRE(turn_action.GetProgress() != 0);
+}
+
+
+//========================================
+// Camera Class Tests
+//========================================
+
+TEST_CASE("Camera Default Constructor") {
+	Camera camera;
+
+	REQUIRE(camera.GetPosition() == ofPoint(0, 0, 0));
 }

@@ -14,7 +14,7 @@ public:
 	void SetFloor(const Floor& floor);
 	void SetWall(const Wall& wall);
 
-	void draw(int x, int y, int width, int height);
+	void draw(int x, int y, int width, int height) const;
 
 private:	
 	Floor floor_;

@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "board.h"
+#include "camera.h"
 
 class ofApp : public ofBaseApp {
 
@@ -24,4 +25,5 @@ public:
 		
 private:
 	Board board;
+	Camera camera;
 };

@@ -20,7 +20,8 @@ public:
 	int GetMaxProgress() const;
 	bool IsComplete() const;
 
-	//Increment amount will vary based on owner conditions
+	//Increment amount will vary based on owner properties (skill, speed, health)
+	//This way, different entities can have different speeds for actions
 	void IncrementProgress();
 	TurnAction& operator++();
 
@@ -36,6 +37,6 @@ private:
 	//Max time for various actions
 	//Divide by 600 to get average seconds for each action
 	const static int kIdleTime = 50;
-	const static int kMoveTime = 500;
-	const static int kDigTime = 3000;
+	const static int kMoveTime = 300;
+	const static int kDigTime = 1500;
 };

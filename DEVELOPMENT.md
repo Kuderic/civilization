@@ -142,3 +142,21 @@ This also means that each frame when the Entity is asked to create a TurnAction,
 they won't create a new one if their current TurnAction is still what they want to do.
 e.g. TurnAction is Dig Wall which takes 120 frames (2 seconds). entity.GetTurnAction()
 will not alter TurnAction as long as the dig designation on the wall is not removed by the player.
+
+Finishing yesterday's to-do list will have to wait until tomorrow.
+
+- [x] Create TurnAction class
+	* Has an internal progress bar which is incremented each frame
+		* Max progress determined by action. e.g. Mining = 1600, Walking = 300
+		* Progress speed is based on owner Entity's properties
+		* This allows different entities to have differing speeds for actions
+	* When progress is full, is parsed by board (for now) to complete action
+- [x] Create Camera class
+	* Can be moved with arrow keys
+	* Draws parts of the board to screen
+	* Board can be made bigger than screen
+
+One issue I ran into while making the Camera class was parsing my clicks to the screen.
+This is because now my mouse's coordinates didnt match up to the tile coordinates if
+my camera was not at (0, 0). I easily fixed this by adding the camera's position vector
+to the mouse position.

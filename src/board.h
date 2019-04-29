@@ -8,25 +8,26 @@
 class Board
 {
 public:
-	//Board dimensions when setup
-	static const int kBoardWidth = 20;
-	static const int kBoardHeight = 15;
+	//Board dimensions when setup.
+	static const int kBoardWidth = 16 * 3;
+	static const int kBoardHeight = 12 * 3;
 
 	Board();
 
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
+	const std::vector<Entity*>& GetEntities() const;
 	const Tile& GetTileAt(int x, int y) const;
 
 	void setup();
 	void update();
-	void draw();
+	//No draw() here. Set up a Camera object to the board for screen output
 
-	void DeleteWallTest(int pixel_x, int pixel_y);
+	void TileClicked(const ofPoint position);
 
 private:
-	//Generate a 5x5 stone block in setup(). Replace with generative function
-	static const int kStoneGenWidth = 5;
-	static const int kNumColonists = 3;
+	//Generate stone area at setup
+	static const int kStoneGenWidth = 8;
+	static const int kNumColonists = 1;
 
 	std::vector<Entity*> entities_;
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_;

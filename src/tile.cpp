@@ -20,7 +20,7 @@ void Tile::SetWall(const Wall& wall) {
 	wall_ = wall;
 }
 
-void Tile::draw(int x, int y, int width, int height) {
+void Tile::draw(int x, int y, int width, int height) const {
 	//If wall exists, draw that instead of floor
 	if (wall_.GetImage()) {
 		wall_.GetImage()->draw(x, y, width, height);
