@@ -174,7 +174,7 @@ To-do list:
 		* Tests wall collision (make sure colonists can't move onto a tile with a wall)
 	- [ ] Idle movement
 		* Move in a random direction periodically if idle
-	- [ ] Dijkstra Algorithm
+	- [ ] A* Pathing Algorithm
 		* Calculate the shortest path between nodes (tiles)
 		* Avoid walls
 	- [ ] Directed movement
@@ -186,3 +186,5 @@ I came up with a way to only draw walls that are exposed to air, so I implemente
 I just check each wall's neighboring tiles and if at least one neighbor has no wall, then I draw the wall.
 
 I also added a pause option by hitting spacebar.
+
+I have opted to use the A* pathing algorithm rather than Dijkstra's.
