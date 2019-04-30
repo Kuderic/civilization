@@ -21,8 +21,21 @@ TEST_CASE("Board GetTileAt()") {
 	Board board;
 	board.setup();
 
-	const Tile& tile = board.GetTileAt(0, 0);
-	REQUIRE(tile.GetFloor().GetType() == Floor::Type::GRASS);
+	const Tile* tile = board.GetTileAt(ofPoint(0, 0));
+	REQUIRE(tile->GetFloor().GetType() == Floor::Type::GRASS);
+}
+
+TEST_CASE("Board GetTileAt() Invalid") {
+	ofSetupOpenGL(1600, 1200, OF_WINDOW);
+	Board board;
+	board.setup();
+
+	const Tile* tile = board.GetTileAt(ofPoint(-1, -1));
+	REQUIRE(tile == nullptr);
+	tile = board.GetTileAt(ofPoint(Board::kBoardWidth, 0));
+	REQUIRE(tile == nullptr);
+	tile = board.GetTileAt(ofPoint(0, Board::kBoardHeight));
+	REQUIRE(tile == nullptr);
 }
 
 

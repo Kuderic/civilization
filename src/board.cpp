@@ -11,8 +11,39 @@ const std::vector<Entity*>& Board::GetEntities() const {
 	return entities_;
 }
 
-const Tile& Board::GetTileAt(int x, int y) const {
-	return tiles_[x][y];
+const Tile* Board::GetTileAt(ofPoint position) const {
+	int x = position.x;
+	int y = position.y;
+
+	if (x < 0 || x >= kBoardWidth || y < 0 || y >= kBoardHeight) {
+		return nullptr;
+	}
+
+	return &tiles_[x][y];
+}
+
+//Check the 8 surrounding tiles. If all neighboring tiles have walls, return true
+bool Board::IsSurroundedByWallsAt(ofPoint position) const {
+	int x = position.x;
+	int y = position.y;
+
+	for (int i = x - 1; i < x + 2; i++) {
+		for (int j = y - 1; j < y + 2; j++) {
+			//Skip over self
+			if (i == x && j == y) {
+				continue;
+			}
+			const Tile* neighbor = GetTileAt(ofPoint(i, j));
+
+			//Check that neighbor exists (for edge tiles)
+			if (!neighbor) {
+				continue;
+			} else if (!neighbor->HasWall()) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 //Generate gameboard

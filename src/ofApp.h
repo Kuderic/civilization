@@ -24,6 +24,8 @@ public:
 	void gotMessage(ofMessage msg);
 		
 private:
+	const int kFrameRate = 30;
+
 	Board board;
 	Camera camera;
 };

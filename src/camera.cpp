@@ -73,21 +73,26 @@ void Camera::KeyReleased(int key) {
 }
 
 void Camera::draw() {
-	const std::array<std::array<Tile, Board::kBoardHeight>, Board::kBoardWidth>& tiles = board_->GetTiles();
 	const std::vector<Entity*>& entities = board_->GetEntities();
 
 	//Calculate the width and height each tile should be drawn with
 	int tile_width = ofGetWindowWidth() / width_;
 	int tile_height = ofGetWindowHeight() / height_;
 
-	//Draw tiles starting at position_
+	//Iterate through tiles
 	for (int i = 0; i < width_; i++) {
 		for (int j = 0; j < height_; j++) {
-			//Calculate the pixel position of each tile
-			int pixel_x = tile_width * i;
-			int pixel_y = tile_height * j;
+			ofPoint tile_position = ofPoint(i + position_.x, j + position_.y);
+			const Tile* tile = board_->GetTileAt(tile_position);
 
-			tiles[i + position_.x][j + position_.y].draw(pixel_x, pixel_y, tile_width, tile_height);
+			//Check that the tile is not surrounded by walls (can be seen)
+			if (!board_->IsSurroundedByWallsAt(tile_position)) {
+				//Calculate the pixel position of each tile
+				int pixel_x = tile_width * i;
+				int pixel_y = tile_height * j;
+
+				tile->draw(pixel_x, pixel_y, tile_width, tile_height);
+			}
 		}
 	}
 

@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofBackground(ofColor::black);
-	ofSetFrameRate(60);
+	ofSetFrameRate(kFrameRate);
 
 	Floor::LoadTextures();
 	Wall::LoadTextures();
@@ -19,6 +19,12 @@ void ofApp::setup(){
 void ofApp::update(){
 	board.update();
 	camera.update();
+
+
+	//Framerate counter
+	std::stringstream stream;
+	stream << "fps: " << ofGetFrameRate();
+	ofSetWindowTitle(stream.str());
 }
 
 //--------------------------------------------------------------

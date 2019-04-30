@@ -171,7 +171,7 @@ I just check each wall's neighboring tiles.
 If at least one neighbor has no wall, then I draw the wall.
 
 To-do list:
-- [IP] Try to only draw outermost wall layer and leave rest black
+- [x] Try to only draw outermost wall layer and leave rest black
 - [x] Create Colonist class
 	* Will look like dogs because dogs are cute
 	* At first won't do anything until other actions are implemented

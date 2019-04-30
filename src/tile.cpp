@@ -8,8 +8,13 @@ Tile::Tile() {
 const Floor& Tile::GetFloor() const {
 	return floor_;
 }
+
 const Wall& Tile::GetWall() const {
 	return wall_;
+}
+
+bool Tile::HasWall() const {
+	return wall_.GetType() != Wall::Type::EMPTY;
 }
 
 void Tile::SetFloor(const Floor& floor) {
@@ -22,7 +27,7 @@ void Tile::SetWall(const Wall& wall) {
 
 void Tile::draw(int x, int y, int width, int height) const {
 	//If wall exists, draw that instead of floor
-	if (wall_.GetImage()) {
+	if (this->HasWall()) {
 		wall_.GetImage()->draw(x, y, width, height);
 	} else {
 		floor_.GetImage()->draw(x, y, width, height);

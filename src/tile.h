@@ -10,6 +10,7 @@ public:
 
 	const Floor& GetFloor() const;
 	const Wall& GetWall() const;
+	bool HasWall() const;
 
 	void SetFloor(const Floor& floor);
 	void SetWall(const Wall& wall);
