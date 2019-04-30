@@ -24,8 +24,15 @@ public:
 	void gotMessage(ofMessage msg);
 		
 private:
-	const int kFrameRate = 30;
+	enum class GameState {
+		PAUSED,
+		PLAY_GAME
+	};
 
+	const static int kFrameRate = 30;
+
+	GameState game_state;
 	Board board;
 	Camera camera;
+	ofTrueTypeFont pause_text;
 };

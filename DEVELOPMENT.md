@@ -166,17 +166,10 @@ to the mouse position.
 Today I will try to finish up pathing algorithms for entities and start working
 on basic gameplay/adding more features.
 
-Also, I've come up with a way to only draw walls that are exposed to air.
-I just check each wall's neighboring tiles.
-If at least one neighbor has no wall, then I draw the wall.
-
 To-do list:
-- [x] Try to only draw outermost wall layer and leave rest black
+- [x] Only draw outermost wall layer and leave rest black
 - [x] Create Colonist class
-	* Will look like dogs because dogs are cute
-	* At first won't do anything until other actions are implemented
-	* Start with one colonist at first. Implement more later
-	- [ ] User-controlled movement
+	- [x] User-controlled movement
 		* Let user control movement with arrow keys
 		* Tests wall collision (make sure colonists can't move onto a tile with a wall)
 	- [ ] Idle movement
@@ -187,3 +180,9 @@ To-do list:
 	- [ ] Directed movement
 		* Give a colonist a location to move to
 		* It will attempt to path there while avoiding walls
+- [x] Pause using spacebar
+		
+I came up with a way to only draw walls that are exposed to air, so I implemented that
+I just check each wall's neighboring tiles and if at least one neighbor has no wall, then I draw the wall.
+
+I also added a pause option by hitting spacebar.

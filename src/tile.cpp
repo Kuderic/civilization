@@ -13,16 +13,16 @@ const Wall& Tile::GetWall() const {
 	return wall_;
 }
 
-bool Tile::HasWall() const {
-	return wall_.GetType() != Wall::Type::EMPTY;
-}
-
 void Tile::SetFloor(const Floor& floor) {
 	floor_ = floor;
 }
 
 void Tile::SetWall(const Wall& wall) {
 	wall_ = wall;
+}
+
+bool Tile::HasWall() const {
+	return wall_.GetType() != Wall::Type::EMPTY;
 }
 
 void Tile::draw(int x, int y, int width, int height) const {

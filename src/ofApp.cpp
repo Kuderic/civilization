@@ -2,7 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	game_state = GameState::PLAY_GAME;
+	pause_text.load("../../resources/SEA_GARDENS.ttf", 50);
+
 	ofBackground(ofColor::black);
+	ofSetColor(ofColor::black);
 	ofSetFrameRate(kFrameRate);
 
 	Floor::LoadTextures();
@@ -16,10 +20,12 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-	board.update();
-	camera.update();
+void ofApp::update() {
+	if (game_state == GameState::PLAY_GAME) {
+		board.update();
+	}
 
+	camera.update();
 
 	//Framerate counter
 	std::stringstream stream;
@@ -29,12 +35,31 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	ofSetColor(ofColor::white);
 	camera.draw();
+
+	if (game_state == GameState::PAUSED) {
+		ofSetColor(ofColor::black);
+		pause_text.drawString("PAUSED", 200, 200);
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	camera.KeyPressed(key);
+
+	//Pause/unpause game if space pressed
+	if (key == ' ') {
+		switch (game_state) {
+		case GameState::PAUSED:
+			game_state = GameState::PLAY_GAME;
+			break;
+
+		case GameState::PLAY_GAME:
+			game_state = GameState::PAUSED;
+			break;
+		}
+	}
 }
 
 //--------------------------------------------------------------
