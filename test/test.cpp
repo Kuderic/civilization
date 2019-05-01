@@ -246,9 +246,10 @@ TEST_CASE("TurnAction operator++") {
 //========================================
 
 TEST_CASE("Camera Default Constructor") {
+	ofSetupOpenGL(1600, 1200, OF_WINDOW);
 	Camera camera;
 
-	REQUIRE(camera.GetPosition() == ofPoint(0, 0, 0));
+	REQUIRE(camera.GetHeight() == Camera::kDefaultHeight);
 }
 
 
@@ -272,9 +273,9 @@ TEST_CASE("Basic Pathing Test") {
 	Board board;
 	board.setup();
 
-	std::vector<ofPoint> path = board.GetPath(ofPoint(0, 0), ofPoint(14, 30));
+	std::vector<ofPoint> path = board.GetPath(ofPoint(0, 0), ofPoint(3, 3));
 
-	for (ofPoint p : path) {
-		std::cout << p << std::endl;
+	for (int i = 0; i < path.size(); i++) {
+		std::cout << path[i] << std::endl;
 	}
 }

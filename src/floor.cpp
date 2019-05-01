@@ -13,9 +13,9 @@ Floor::Floor(const Type type) {
 	switch (type) {
 
 	case Type::GRASS:
-		if (rand < 60) {
+		if (rand < 68) {
 			image_ = &grass_floor_1_;
-		} else if (rand < 90) {
+		} else if (rand < 92) {
 			image_ = &grass_floor_2_;
 		} else if (rand < 100) {
 			image_ = &grass_floor_3_;
@@ -23,7 +23,7 @@ Floor::Floor(const Type type) {
 		break;
 
 	case Type::STONE:
-		if (rand < 85) {
+		if (rand < 60) {
 			image_ = &stone_floor_1_;
 		}
 		else if (rand < 100) {

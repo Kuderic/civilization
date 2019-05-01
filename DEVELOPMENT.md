@@ -216,7 +216,7 @@ need to create an enum for my entities that dictates their current Activity.
 
 If I have extra time I will make a class for my interface.
 
-- [ ] Task class
+- [x] Task class
 - [ ] Activity enum
 - [ ] Idle activity
 	-	Walk in a random direction if no tasks
@@ -225,4 +225,6 @@ If I have extra time I will make a class for my interface.
 	-	Carry items to an area
 - [ ] Build activity
 	-	Construct a wall from an item (resource)
-- [x] Zoom in and out with '+' and '-'
+- [x] Added zooming in and out with '+' and '-'
+- [x] Added background music
+- [x] Added way to remove designations

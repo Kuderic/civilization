@@ -55,7 +55,7 @@ bool Board::IsSurroundedByWallsAt(ofPoint position) const {
 	return true;
 }
 
-void Board::CreateWall(Wall::Type type, ofPoint position) {
+void Board::CreateWall(Wall::Type type, const ofPoint position) {
 	if (!IsValidTile(position)) {
 		std::cout << "Cannot create wall. Tile doesn't exist at " << position << std::endl;
 		return;
@@ -72,7 +72,34 @@ void Board::RemoveWall(ofPoint position) {
 }
 
 void Board::CreateDigTask(ofPoint position) {
-	Task task = Task(Task::Type::DIG, position);
+	//Check that wall exists
+	if (!GetTileAt(position)->HasWall()) {
+		std::cout << "No wall to dig at " << position << std::endl;
+		return;
+	}
+
+	//Check that the position doesn't already have a task
+	for (Task task : tasks_) {
+		if (task.GetPosition() == position) {
+			std::cout << "Task already exists at " << position << std::endl;
+			return;
+		}
+	}
+
+	Task new_task = Task(Task::Type::DIG, position);
+	tasks_.push_back(new_task);
+}
+
+void Board::RemoveTask(ofPoint position) {
+	//Find the task
+	for (int i = 0; i < tasks_.size(); i++) {
+		if (tasks_[i].GetPosition() == position) {
+			std::cout << "Task deleted" << std::endl;
+			tasks_.erase(tasks_.begin() + i); //Note: vector erase is inefficient.
+			//Would be more efficient to store tasks in a 2d array
+			return;
+		}
+	}
 }
 
 //Generate gameboard

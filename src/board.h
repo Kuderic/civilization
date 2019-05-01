@@ -18,7 +18,7 @@ public:
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
 	const std::vector<Entity*>& GetEntities() const;
 	const std::vector<Task>& GetTasks() const;
-	const Tile* GetTileAt(ofPoint position) const;
+	const Tile* GetTileAt(const ofPoint position) const;
 	const vector<ofPoint> GetPath(const ofPoint start, const ofPoint destination);
 
 	bool IsValidTile(ofPoint position) const;
@@ -27,6 +27,7 @@ public:
 	void CreateWall(Wall::Type type, ofPoint position);
 	void RemoveWall(ofPoint position);
 	void CreateDigTask(ofPoint position);
+	void RemoveTask(ofPoint position);
 
 	void setup();
 	void update();

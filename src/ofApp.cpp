@@ -11,6 +11,7 @@ void ofApp::setup(){
 	Floor::LoadTextures();
 	Wall::LoadTextures();
 	Colonist::LoadTextures();
+	Task::LoadTextures();
 	pause_text.load("../../resources/SEA_GARDENS.ttf", 50);
 	interface_text.load("../../resources/SEA_GARDENS.ttf", 20);
 	fps_counter.load("../../resources/SEA_GARDENS.ttf", 15);
@@ -48,6 +49,7 @@ void ofApp::draw() {
 	interface_text.drawString("'w'|Create Wall", ofGetWindowWidth() - kInterfaceWidth, 30);
 	interface_text.drawString("'x'|Delete Wall", ofGetWindowWidth() - kInterfaceWidth, 60);
 	interface_text.drawString("'d'|Dig Wall", ofGetWindowWidth() - kInterfaceWidth, 90);
+	interface_text.drawString("'r'|Remove Task", ofGetWindowWidth() - kInterfaceWidth, 120);
 
 	//Draw currently selected action in yellow
 	ofSetColor(ofColor::yellow);
@@ -60,8 +62,12 @@ void ofApp::draw() {
 		interface_text.drawString("'x'|Delete Wall", ofGetWindowWidth() - kInterfaceWidth, 60);
 		break;
 
-	case ClickState::MOVE_COLONIST:
+	case ClickState::DIG_TASK:
 		interface_text.drawString("'d'|Dig Wall", ofGetWindowWidth() - kInterfaceWidth, 90);
+		break;
+
+	case ClickState::REMOVE_TASK:
+		interface_text.drawString("'r'|Remove Task", ofGetWindowWidth() - kInterfaceWidth, 120);
 		break;
 	}
 
@@ -136,11 +142,20 @@ void ofApp::UpdateClickState(int key) {
 		break;
 
 	case 'd':
-		if (click_state == ClickState::MOVE_COLONIST) {
+		if (click_state == ClickState::DIG_TASK) {
 			click_state = ClickState::NONE;
 		}
 		else {
-			click_state = ClickState::MOVE_COLONIST;
+			click_state = ClickState::DIG_TASK;
+		}
+		break;
+
+	case 'r':
+		if (click_state == ClickState::REMOVE_TASK) {
+			click_state = ClickState::NONE;
+		}
+		else {
+			click_state = ClickState::REMOVE_TASK;
 		}
 		break;
 	}
@@ -158,7 +173,12 @@ void ofApp::ParseBoardClick(int x, int y, int button) {
 		board.RemoveWall(tile_pos);
 		break;
 
-	case ClickState::MOVE_COLONIST:
+	case ClickState::DIG_TASK:
+		board.CreateDigTask(tile_pos);
+		break;
+
+	case ClickState::REMOVE_TASK:
+		board.RemoveTask(tile_pos);
 		break;
 	}
 }

@@ -26,7 +26,8 @@ private:
 		NONE,
 		CREATE_WALL,
 		DELETE_WALL,
-		MOVE_COLONIST
+		DIG_TASK,
+		REMOVE_TASK
 	};
 	const static int kInterfaceWidth = 300;	//Pixel width of interface
 	const static int kFrameRate = 60;

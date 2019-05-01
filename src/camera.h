@@ -47,5 +47,8 @@ private:
 	bool left_pressed_;
 	bool plus_pressed_;
 	bool minus_pressed_;
+
+	//Check that a position should be drawn
+	bool PositionIsInView(const ofPoint position) const;
 };
 

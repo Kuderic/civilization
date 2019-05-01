@@ -125,8 +125,6 @@ void Camera::KeyReleased(int key) {
 }
 
 void Camera::draw() {
-	const std::vector<Entity*>& entities = board_->GetEntities();
-
 	//Calculate the width and height each tile should be drawn with
 	int tile_width = pixel_width_ / width_;
 	int tile_height = pixel_height_ / height_;
@@ -141,28 +139,33 @@ void Camera::draw() {
 			if (tile->HasWall() && board_->IsSurroundedByWallsAt(tile_position)) {
 				continue;
 			}
-
 			//Calculate the pixel position of each tile
 			int pixel_x = tile_width * i;
 			int pixel_y = tile_height * j;
-
 			tile->draw(pixel_x, pixel_y, tile_width, tile_height);
 		}
 	}
 
-	//Draw entities after tiles
+	//Draw desginations
+	const std::vector<Task>& tasks = board_->GetTasks();
+	for (Task task : tasks) {
+		const ofPoint task_position = task.GetPosition();
+
+		if (PositionIsInView(task_position)) {
+			int pixel_x = tile_width * (task_position.x - position_.x);
+			int pixel_y = tile_height * (task_position.y - position_.y);
+			task.draw(pixel_x, pixel_y, tile_width, tile_height);
+		}
+	}
+
+	//Draw entities
+	const std::vector<Entity*>& entities = board_->GetEntities();
 	for (int i = 0; i < entities.size(); i++) {
 		ofPoint entity_position = entities[i]->GetPosition();
 
-		//If entity is in the camera view, draw it
-		if (entity_position.x >= position_.x &&
-			entity_position.x < position_.x + width_ &&
-			entity_position.y >= position_.y &&
-			entity_position.y < position_.y + height_) {
-
+		if (PositionIsInView(entity_position)) {
 			int pixel_x = tile_width * (entity_position.x - position_.x);
 			int pixel_y = tile_height * (entity_position.y - position_.y);
-
 			entities[i]->draw(pixel_x, pixel_y, tile_width, tile_height);
 		}
 	}
@@ -189,4 +192,11 @@ void Camera::update() {
 		SetHeight(height_ + 1);
 		SetWidth(width_ + 1);
 	}
+}
+
+bool Camera::PositionIsInView(const ofPoint position) const {
+	return position.x >= position_.x &&
+		position.x < position_.x + width_ &&
+		position.y >= position_.y &&
+		position.y < position_.y + height_;
 }
