@@ -3,6 +3,7 @@
 #pragma once
 
 class Board;
+
 //This is an abstract class
 class Entity
 {
@@ -22,8 +23,15 @@ public:
 	void draw(int x, int y, int width, int height);
 
 protected:
+	enum class Activity {
+		IDLE,
+		WALKING,
+		DIGGING
+	};
+
 	ofImage* image_;
 	TurnAction turn_action_;
+	Activity activity_;
 
 	//	Store current path. Only update periodically or if a tile in the path becomes a wall.
 	const std::vector<ofPoint> current_path;

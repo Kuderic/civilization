@@ -1,20 +1,18 @@
 #include "turn_action.h"
 
 TurnAction::TurnAction() {
-	action_ = Action::IDLE;
+	action_ = Action::NONE;
 	progress_ = 0;
 	max_progress_ = kIdleTime;
-	owner_ = nullptr;
 }
 
-TurnAction::TurnAction(const Action action, const ofPoint target, const Entity* owner) {
+TurnAction::TurnAction(const Action action, const ofPoint target) {
 	action_ = action;
 	target_ = target;
 	progress_ = 0;
-	owner_ = owner;
 
 	switch (action) {
-		case Action::IDLE:
+		case Action::NONE:
 			max_progress_ = kIdleTime;
 			break;
 
@@ -26,10 +24,6 @@ TurnAction::TurnAction(const Action action, const ofPoint target, const Entity* 
 			max_progress_ = kDigTime;
 			break;
 	}
-}
-
-const Entity* TurnAction::GetOwner() const {
-	return owner_;
 }
 
 Action TurnAction::GetAction() const {

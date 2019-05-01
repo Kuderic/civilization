@@ -14,4 +14,8 @@ public:
 
 private:
 	static ofImage dog_1;
+
+	Entity::Activity GetNewActivity(const Board& board);
+	TurnAction CreateTurnAction(const Board& board);
+	TurnAction CreateRandomMove();
 };

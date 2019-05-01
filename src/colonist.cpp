@@ -1,4 +1,6 @@
 #include "colonist.h"
+#include "board.h"
+#include "task.h"
 
 Colonist::Colonist() {
 	//Entity default constructor called automatically
@@ -16,20 +18,49 @@ void Colonist::LoadTextures() {
 }
 
 void Colonist::UpdateTurnAction(const Board& board) {
-	if (turn_action_.GetAction() != Action::MOVE) {
-		ofPoint my_pos = GetPosition();
-		ofPoint target_pos = ofPoint(my_pos.x + 1, my_pos.y + 1, my_pos.z);
-
-		turn_action_ = TurnAction(Action::MOVE, target_pos, this);
-	}
-	if (turn_action_.IsComplete()) {
-		ofPoint my_pos = GetPosition();
-		ofPoint target_pos = ofPoint(my_pos.x + 1, my_pos.y + 1, my_pos.z);
-
-		turn_action_ = TurnAction(Action::MOVE, target_pos, this);
+	//Finish turn_action first
+	if (!turn_action_.IsComplete()) {
+		turn_action_.IncrementProgress();
+		return;
 	}
 
-	turn_action_.IncrementProgress();
+	//Update activity_ based on current board tasks
+	activity_ = GetNewActivity(board);
+	//Create a new TurnAction based on current Activity
+	turn_action_ = CreateTurnAction(board);
+}
+
+Entity::Activity Colonist::GetNewActivity(const Board& board) {
+	std::cout << "Getting new activity: ";
+	const std::vector<Task>& tasks = board.GetTasks();
+	
+	if (tasks.size() == 0) {
+		std::cout << "IDLE" << std::endl;
+		return Activity::IDLE;
+	}
+}
+
+TurnAction Colonist::CreateTurnAction(const Board& board) {
+	std::cout << "Creating new TurnAction: ";
+	switch (activity_) {
+	
+	//Move in random direction
+	case Activity::IDLE:
+		std::cout << "Random move" << std::endl;
+		return CreateRandomMove();
+	}
+}
+
+TurnAction Colonist::CreateRandomMove() {
+	int x_rand = (int) ofRandom(-2, 2);
+	int y_rand = (int) ofRandom(-2, 2);
+	std::cout << x_rand << std::endl;
+	std::cout << y_rand << std::endl;
+
+	ofPoint current = GetPosition();
+	ofPoint dest = ofPoint(current.x + x_rand, current.y + y_rand);
+
+	return TurnAction(Action::MOVE, dest);
 }
 
 //Define static variables

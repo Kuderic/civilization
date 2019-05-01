@@ -217,8 +217,8 @@ need to create an enum for my entities that dictates their current Activity.
 If I have extra time I will make a class for my interface.
 
 - [x] Task class
-- [ ] Activity enum
-- [ ] Idle activity
+- [x] Activity enum
+- [x] Idle activity
 	-	Walk in a random direction if no tasks
 - [ ] Dig activity
 - [ ] Haul activity

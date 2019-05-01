@@ -72,6 +72,10 @@ void Board::RemoveWall(ofPoint position) {
 }
 
 void Board::CreateDigTask(ofPoint position) {
+	if (!IsValidTile(position)) {
+		std::cout << "Cannot creat dig designation. Tile doesn't exist at " << position << std::endl;
+		return;
+	}
 	//Check that wall exists
 	if (!GetTileAt(position)->HasWall()) {
 		std::cout << "No wall to dig at " << position << std::endl;
@@ -100,6 +104,7 @@ void Board::RemoveTask(ofPoint position) {
 			return;
 		}
 	}
+	std::cout << "No task to remove at " << position << std::endl;
 }
 
 //Generate gameboard
@@ -117,17 +122,26 @@ void Board::update() {
 	for (int i = 0; i < entities_.size(); i++) {
 		Entity& entity = *entities_[i];
 
-		//Give entity a reference to board so it can update its action
+		//Give entity a reference to board so it can decide what to do
 		entity.UpdateTurnAction(*this);
 
 		TurnAction& action = entity.GetTurnAction();
-		/* Parse action for entity if done
+
+		/* Parse TurnAction if complete
 			Note: I handle parsing in Board because board is the only class that has access to everything
 			E.g. if action is digging a wall, board can remove the wall when action is complete*/
 		if (action.IsComplete()) {
 			switch (action.GetAction()) {
+
 			case Action::MOVE:
-				entity.SetPosition(action.GetTarget());
+				ofPoint destination = action.GetTarget();
+				//Check that tile is on the board and isn't a wall
+				if (IsValidTile(destination) &&
+					!GetTileAt(destination)->HasWall()) {
+					entity.SetPosition(destination);
+				} else {
+					std::cout << "Entity did not move; invalid move tile" << std::endl;
+				}
 			}
 		}
 	}
@@ -249,7 +263,7 @@ const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint des
 				int neighbor_x = x + new_x;
 				int neighbor_y = y + new_y;
 				//Make sure tile is valid
-				if (IsValidTile(ofPoint(neighbor_x, neighbor_y))) {
+				if (!IsValidTile(ofPoint(neighbor_x, neighbor_y))) {
 					continue;
 				}
 

@@ -3,7 +3,7 @@
 
 class Entity;
 enum class Action {
-	IDLE,
+	NONE,
 	MOVE,
 	DIG,
 	BUILD
@@ -12,9 +12,8 @@ enum class Action {
 class TurnAction {
 public:
 	TurnAction();
-	TurnAction(const Action action, const ofPoint target, const Entity* owner);
+	TurnAction(const Action action, const ofPoint target);
 
-	const Entity* GetOwner() const;
 	Action GetAction() const;
 	ofPoint GetTarget() const;
 	int GetProgress() const;
@@ -27,8 +26,6 @@ public:
 	TurnAction& operator++();
 
 private:
-	const Entity* owner_;
-
 	Action action_;
 	ofPoint target_;
 	int progress_; //Increments each frame

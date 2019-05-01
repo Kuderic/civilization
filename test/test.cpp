@@ -163,7 +163,7 @@ TEST_CASE("Colonist GetImage()") {
 TEST_CASE("Colonist GetTurnAction()") {
 	Colonist colonist;
 
-	REQUIRE(colonist.GetTurnAction().GetAction() == Action::IDLE);
+	REQUIRE(colonist.GetTurnAction().GetAction() == Action::NONE);
 }
 
 TEST_CASE("Colonist SetPosition()") {
@@ -181,49 +181,43 @@ TEST_CASE("Colonist SetPosition()") {
 TEST_CASE("TurnAction Default Constructor") {
 	TurnAction turn_action;
 
-	REQUIRE(turn_action.GetAction() == Action::IDLE);
+	REQUIRE(turn_action.GetAction() == Action::NONE);
 }
 
 TEST_CASE("TurnAction Specific Constructor") {
-	Colonist colonist;
-	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+	TurnAction turn_action = TurnAction(Action::NONE, ofPoint(0, 0, 0));
 
-	REQUIRE(turn_action.GetAction() == Action::IDLE);
+	REQUIRE(turn_action.GetAction() == Action::NONE);
 	REQUIRE(turn_action.GetTarget() == ofPoint(0, 0, 0));
 }
 
 TEST_CASE("TurnAction GetAction()") {
-	Colonist colonist;
-	TurnAction turn_action = TurnAction(Action::DIG, ofPoint(0, 0, 0), &colonist);
+	TurnAction turn_action = TurnAction(Action::DIG, ofPoint(0, 0, 0));
 
 	REQUIRE(turn_action.GetAction() == Action::DIG);
 }
 
 TEST_CASE("TurnAction GetTarget()") {
-	Colonist colonist;
-	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(1, 0, 0), &colonist);
+	TurnAction turn_action = TurnAction(Action::NONE, ofPoint(1, 0, 0));
 
 	REQUIRE(turn_action.GetTarget() == ofPoint(1, 0, 0));
 }
 
 TEST_CASE("TurnAction GetProgress()") {
-	Colonist colonist;
-	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+	TurnAction turn_action = TurnAction(Action::NONE, ofPoint(0, 0, 0));
 
 	REQUIRE(turn_action.GetProgress() == 0);
 }
 
 TEST_CASE("TurnAction IncrementProgress()") {
-	Colonist colonist;
-	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+	TurnAction turn_action = TurnAction(Action::NONE, ofPoint(0, 0, 0));
 	turn_action.IncrementProgress();
 
 	REQUIRE(turn_action.GetProgress() != 0);
 }
 
 TEST_CASE("TurnAction IncrementProgress() Past Max") {
-	Colonist colonist;
-	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+	TurnAction turn_action = TurnAction(Action::NONE, ofPoint(0, 0, 0));
 
 	for (int i = 0; i < 9999; i++) {
 		turn_action.IncrementProgress();
@@ -233,8 +227,7 @@ TEST_CASE("TurnAction IncrementProgress() Past Max") {
 }
 
 TEST_CASE("TurnAction operator++") {
-	Colonist colonist;
-	TurnAction turn_action = TurnAction(Action::IDLE, ofPoint(0, 0, 0), &colonist);
+	TurnAction turn_action = TurnAction(Action::NONE, ofPoint(0, 0, 0));
 	++turn_action;
 
 	REQUIRE(turn_action.GetProgress() != 0);
@@ -273,7 +266,7 @@ TEST_CASE("Basic Pathing Test") {
 	Board board;
 	board.setup();
 
-	std::vector<ofPoint> path = board.GetPath(ofPoint(0, 0), ofPoint(3, 3));
+	std::vector<ofPoint> path = board.GetPath(ofPoint(0, 0), ofPoint(5, 5));
 
 	for (int i = 0; i < path.size(); i++) {
 		std::cout << path[i] << std::endl;
