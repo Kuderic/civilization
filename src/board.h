@@ -17,15 +17,17 @@ public:
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
 	const std::vector<Entity*>& GetEntities() const;
 	const Tile* GetTileAt(ofPoint position) const;
-
 	const vector<ofPoint> GetPath(const ofPoint start, const ofPoint destination);
+
+	bool IsValidTile(ofPoint position) const;
 	bool IsSurroundedByWallsAt(ofPoint position) const;
+
+	void CreateWall(Wall::Type type, ofPoint position);
+	void RemoveWall(ofPoint position);
 
 	void setup();
 	void update();
 	//No draw() here. Set up a Camera object to the board for screen output
-
-	void TileClicked(ofPoint position);
 
 private:
 	//Generate stone area at setup

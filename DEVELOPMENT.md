@@ -198,10 +198,10 @@ It can also be updated if a tile in the path becomes obstructed.
 I will also be adding keybinds to create walls and designate tiles for Entities to path to
 so that I may better test the pathing algorithm in-game.
 
-- [ ] A* Pathing
+- [x] A* Pathing
 	- Found an example of the algorithm online and implemented it into my project
-- [ ] Create wall by pressing 'w' (toggle) and clicking
-- [ ] Delete wall by pressing 'x' (toggle) and clicking
+- [x] Create wall by pressing 'w' (toggle) and clicking
+- [x] Delete wall by pressing 'x' (toggle) and clicking
 - [ ] Designate tile to move to by pressing 'm' and clicking
-- [ ] Add basic interface to show which action is selected
-- [ ] Only one selection is allowed at a time
+- [x] Add basic interface to show which action is selected
+- [x] Only one selection is allowed at a time

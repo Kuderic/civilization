@@ -28,11 +28,22 @@ private:
 		PAUSED,
 		PLAY_GAME
 	};
-
+	enum class ClickState {
+		NONE,
+		CREATE_WALL,
+		DELETE_WALL,
+		MOVE_COLONIST
+	};
 	const static int kFrameRate = 30;
 
 	GameState game_state;
+	ClickState click_state;
 	Board board;
 	Camera camera;
+	//Organize this into an interface class maybe
 	ofTrueTypeFont pause_text;
+	ofTrueTypeFont interface_text;
+
+	void UpdateClickState(int key);
+	void ParseBoardClick(int x, int y, int button);
 };

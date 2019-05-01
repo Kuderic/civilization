@@ -13,7 +13,7 @@ ofPoint Camera::GetPosition() const {
 }
 
 //Called when mouse clicks
-ofPoint Camera::GetTilePosition(int pixel_x, int pixel_y) const {
+ofPoint Camera::GetTilePositionAt(int pixel_x, int pixel_y) const {
 	int tile_width = ofGetWindowWidth() / width_;
 	int tile_height = ofGetWindowHeight() / height_;
 	int x = position_.x + pixel_x / tile_width;

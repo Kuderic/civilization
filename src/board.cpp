@@ -12,14 +12,19 @@ const std::vector<Entity*>& Board::GetEntities() const {
 }
 
 const Tile* Board::GetTileAt(ofPoint position) const {
-	int x = position.x;
-	int y = position.y;
-
-	if (x < 0 || x >= kBoardWidth || y < 0 || y >= kBoardHeight) {
+	if (!IsValidTile(position)) {
 		return nullptr;
 	}
+	return &tiles_[position.x][position.y];
+}
 
-	return &tiles_[x][y];
+bool Board::IsValidTile(ofPoint position) const {
+	if (position.x < 0 || position.x >= kBoardWidth
+		|| position.y < 0 || position.y >= kBoardHeight) {
+		//std::cout << "Tile doesn't exist at " << position << std::endl;
+		return false;
+	}
+	return true;
 }
 
 //Check the 8 surrounding tiles. If all neighboring tiles have walls, return true
@@ -44,6 +49,22 @@ bool Board::IsSurroundedByWallsAt(ofPoint position) const {
 		}
 	}
 	return true;
+}
+
+void Board::CreateWall(Wall::Type type, ofPoint position) {
+	if (!IsValidTile(position)) {
+		std::cout << "Cannot create wall. Tile doesn't exist at " << position << std::endl;
+		return;
+	}
+	tiles_[position.x][position.y].SetWall(Wall(type));
+}
+
+void Board::RemoveWall(ofPoint position) {
+	if (!IsValidTile(position)) {
+		std::cout << "Cannot remove wall. Tile doesn't exist at " << position << std::endl;
+		return;
+	}
+	tiles_[position.x][position.y].SetWall(Wall(Wall::Type::EMPTY));
 }
 
 //Generate gameboard
@@ -74,16 +95,6 @@ void Board::update() {
 				entity.SetPosition(action.GetTarget());
 			}
 		}
-	}
-}
-
-//Called by camera when a tile is clicked
-void Board::TileClicked(const ofPoint position) {
-	int x = position.x;
-	int y = position.y;
-	//Check that x, y is part of the board
-	if (x < kBoardWidth && y < kBoardHeight) {
-		tiles_[x][y].SetWall(Wall(Wall::Type::EMPTY));
 	}
 }
 
@@ -151,7 +162,7 @@ const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint des
 	vector<ofPoint> empty;
 
 	//Check that destination does not have a wall
-	if (GetTileAt(destination)->HasWall()) {
+	if (IsValidTile(destination) && GetTileAt(destination)->HasWall()) {
 		cout << "Destination is blocked" << endl;
 		return empty;
 	} else if (start == destination) {
@@ -202,8 +213,8 @@ const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint des
 			for (int new_y = -1; new_y <= 1; new_y++) {
 				int neighbor_x = x + new_x;
 				int neighbor_y = y + new_y;
-				//Make sure neighboring tile is valid
-				if (neighbor_x < 0 || neighbor_x >= kBoardWidth || neighbor_y < 0 || neighbor_y >= kBoardHeight) {
+				//Make sure tile is valid
+				if (IsValidTile(ofPoint(neighbor_x, neighbor_y))) {
 					continue;
 				}
 

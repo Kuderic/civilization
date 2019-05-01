@@ -13,7 +13,7 @@ public:
 	Camera();
 
 	ofPoint GetPosition() const;
-	ofPoint GetTilePosition(int pixel_x, int pixel_y) const;
+	ofPoint GetTilePositionAt(int pixel_x, int pixel_y) const;
 
 	void SetBoard(const Board* board);
 	void SetWidth(int width);
