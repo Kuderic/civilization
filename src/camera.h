@@ -18,6 +18,8 @@ public:
 	void SetBoard(const Board* board);
 	void SetWidth(int width);
 	void SetHeight(int height);
+	void SetPixelWidth(int width);
+	void SetPixelHeight(int height);
 	void SetPosition(const ofPoint position);
 
 	void KeyPressed(int key);
@@ -29,6 +31,8 @@ public:
 private:
 	int width_;
 	int height_;
+	int pixel_width_;
+	int pixel_height_;
 	ofPoint position_;
 	const Board* board_;
 

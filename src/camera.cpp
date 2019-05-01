@@ -1,9 +1,12 @@
 #include "camera.h"
 #include "board.h"
+#include "ofApp.h"
 
 Camera::Camera() {
 	width_ = kDefaultWidth;
 	height_ = kDefaultHeight;
+	pixel_width_ = ofGetWindowWidth();
+	pixel_height_ = ofGetWindowHeight();
 	position_ = ofPoint(0, 0, 0);
 	board_ = nullptr;
 }
@@ -14,8 +17,8 @@ ofPoint Camera::GetPosition() const {
 
 //Called when mouse clicks
 ofPoint Camera::GetTilePositionAt(int pixel_x, int pixel_y) const {
-	int tile_width = ofGetWindowWidth() / width_;
-	int tile_height = ofGetWindowHeight() / height_;
+	int tile_width = pixel_width_ / width_;
+	int tile_height = pixel_height_ / height_;
 	int x = position_.x + pixel_x / tile_width;
 	int y = position_.y + pixel_y / tile_height;
 
@@ -32,6 +35,14 @@ void Camera::SetHeight(int height) {
 
 void Camera::SetWidth(int width) {
 	width_ = width;
+}
+
+void Camera::SetPixelHeight(int height) {
+	pixel_height_ = height;
+}
+
+void Camera::SetPixelWidth(int width) {
+	pixel_width_ = width;
 }
 
 void Camera::SetPosition(const ofPoint position) {
@@ -76,8 +87,8 @@ void Camera::draw() {
 	const std::vector<Entity*>& entities = board_->GetEntities();
 
 	//Calculate the width and height each tile should be drawn with
-	int tile_width = ofGetWindowWidth() / width_;
-	int tile_height = ofGetWindowHeight() / height_;
+	int tile_width = pixel_width_ / width_;
+	int tile_height = pixel_height_ / height_;
 
 	//Iterate through tiles
 	for (int i = 0; i < width_; i++) {
@@ -85,14 +96,16 @@ void Camera::draw() {
 			ofPoint tile_position = ofPoint(i + position_.x, j + position_.y);
 			const Tile* tile = board_->GetTileAt(tile_position);
 
-			//Check that the tile is not surrounded by walls (can be seen)
-			if (!board_->IsSurroundedByWallsAt(tile_position)) {
-				//Calculate the pixel position of each tile
-				int pixel_x = tile_width * i;
-				int pixel_y = tile_height * j;
-
-				tile->draw(pixel_x, pixel_y, tile_width, tile_height);
+			//If tile has a wall, check if it is surrounded by walls
+			if (tile->HasWall() && board_->IsSurroundedByWallsAt(tile_position)) {
+				continue;
 			}
+
+			//Calculate the pixel position of each tile
+			int pixel_x = tile_width * i;
+			int pixel_y = tile_height * j;
+
+			tile->draw(pixel_x, pixel_y, tile_width, tile_height);
 		}
 	}
 

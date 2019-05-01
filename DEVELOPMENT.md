@@ -202,6 +202,26 @@ so that I may better test the pathing algorithm in-game.
 	- Found an example of the algorithm online and implemented it into my project
 - [x] Create wall by pressing 'w' (toggle) and clicking
 - [x] Delete wall by pressing 'x' (toggle) and clicking
-- [ ] Designate tile to move to by pressing 'm' and clicking
+- [x] Designate tile to dig by pressing 'd' and clicking
 - [x] Add basic interface to show which action is selected
 - [x] Only one selection is allowed at a time
+
+
+### 5/1/19 - Actually Gameplay
+
+Now that pathing is done I can finally start implementing entity AI and basic gameplay.
+I will need a way to let the AI know that there is a job to be done. I will do this by
+creating a vector of Task classes which is stored in a Board object. I will also
+need to create an enum for my entities that dictates their current Activity.
+
+If I have extra time I will make a class for my interface.
+
+- [ ] Task class
+- [ ] Activity enum
+- [ ] Idle activity
+	-	Walk in a random direction if no tasks
+- [ ] Dig activity
+- [ ] Haul activity
+	-	Carry items to an area
+- [ ] Build activity
+	-	Construct a wall from an item (resource)

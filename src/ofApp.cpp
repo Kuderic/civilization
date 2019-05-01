@@ -6,7 +6,6 @@ void ofApp::setup(){
 	click_state = ClickState::NONE;
 
 	ofBackground(ofColor::black);
-	ofSetColor(ofColor::black);
 	ofSetFrameRate(kFrameRate);
 
 	Floor::LoadTextures();
@@ -40,29 +39,30 @@ void ofApp::draw(){
 	camera.draw();
 
 	if (game_state == GameState::PAUSED) {
-		ofSetColor(ofColor::black);
-		pause_text.drawString("PAUSED", 300, 300);
+		ofSetColor(ofColor::yellow);
+		pause_text.drawString("PAUSED", ofGetWindowWidth() - kInterfaceWidth, ofGetWindowHeight());
 	}
 
-	//Draw interface
-	ofSetColor(ofColor::black);
-	interface_text.drawString("'w' | Create Wall", 10, 30);
-	interface_text.drawString("'d' | Delete Wall", 10, 60);
-	interface_text.drawString("'m' | Move Dog", 10, 90);
+	//	Draw interface
+	//	I know this has magic numbers but I plan to change this completely
+	ofSetColor(ofColor::white);
+	interface_text.drawString("'w'|Create Wall", ofGetWindowWidth() - kInterfaceWidth, 30);
+	interface_text.drawString("'x'|Delete Wall", ofGetWindowWidth() - kInterfaceWidth, 60);
+	interface_text.drawString("'d'|Dig Wall", ofGetWindowWidth() - kInterfaceWidth, 90);
 
 	//Draw currently selected action in yellow
 	ofSetColor(ofColor::yellow);
 	switch (click_state) {
 	case ClickState::CREATE_WALL:
-		interface_text.drawString("'w' | Create Wall", 10, 30);
+		interface_text.drawString("'w'|Create Wall", ofGetWindowWidth() - kInterfaceWidth, 30);
 		break;
 
 	case ClickState::DELETE_WALL:
-		interface_text.drawString("'d' | Delete Wall", 10, 60);
+		interface_text.drawString("'x'|Delete Wall", ofGetWindowWidth() - kInterfaceWidth, 60);
 		break;
 
 	case ClickState::MOVE_COLONIST:
-		interface_text.drawString("'m' | Move Dog", 10, 90);
+		interface_text.drawString("'d'|Dig Wall", ofGetWindowWidth() - kInterfaceWidth, 90);
 		break;
 	}
 }
@@ -84,18 +84,12 @@ void ofApp::keyPressed(int key){
 			break;
 		}
 	}
-
 	UpdateClickState(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
 	camera.KeyReleased(key);
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
 }
 
 //--------------------------------------------------------------
@@ -109,32 +103,10 @@ void ofApp::mousePressed(int x, int y, int button) {
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+	//Recalculate camera width and height
+	camera.SetPixelWidth(ofGetWindowWidth() - kInterfaceWidth);
+	camera.SetPixelHeight(ofGetWindowHeight());
 }
 
 void ofApp::UpdateClickState(int key) {
@@ -148,7 +120,7 @@ void ofApp::UpdateClickState(int key) {
 		}
 		break;
 
-	case 'd':
+	case 'x':
 		if (click_state == ClickState::DELETE_WALL) {
 			click_state = ClickState::NONE;
 		}
@@ -157,7 +129,7 @@ void ofApp::UpdateClickState(int key) {
 		}
 		break;
 
-	case 'm':
+	case 'd':
 		if (click_state == ClickState::MOVE_COLONIST) {
 			click_state = ClickState::NONE;
 		}
