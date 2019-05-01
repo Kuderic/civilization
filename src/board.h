@@ -1,6 +1,7 @@
 #include "ofMain.h"
 #include "tile.h"
 #include "colonist.h"
+#include "task.h"
 
 #include <vector>
 
@@ -16,6 +17,7 @@ public:
 
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
 	const std::vector<Entity*>& GetEntities() const;
+	const std::vector<Task>& GetTasks() const;
 	const Tile* GetTileAt(ofPoint position) const;
 	const vector<ofPoint> GetPath(const ofPoint start, const ofPoint destination);
 
@@ -24,6 +26,7 @@ public:
 
 	void CreateWall(Wall::Type type, ofPoint position);
 	void RemoveWall(ofPoint position);
+	void CreateDigTask(ofPoint position);
 
 	void setup();
 	void update();
@@ -34,8 +37,9 @@ private:
 	static const int kStoneGenWidth = 13;
 	static const int kNumColonists = 1;
 
-	std::vector<Entity*> entities_;
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_;
+	std::vector<Entity*> entities_;
+	std::vector<Task> tasks_;
 
 	void GenerateTiles();
 	//Can make the below into a function which takes Floor::Type and a generative function

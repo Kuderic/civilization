@@ -5,7 +5,8 @@ class Entity;
 enum class Action {
 	IDLE,
 	MOVE,
-	DIG
+	DIG,
+	BUILD
 };
 
 class TurnAction {

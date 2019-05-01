@@ -14,6 +14,8 @@ public:
 
 	ofPoint GetPosition() const;
 	ofPoint GetTilePositionAt(int pixel_x, int pixel_y) const;
+	int GetWidth() const;
+	int GetHeight() const;
 
 	void SetBoard(const Board* board);
 	void SetWidth(int width);
@@ -26,7 +28,7 @@ public:
 	void KeyReleased(int key);
 
 	void draw();
-	void update(); // updates position based on key pressed booleans
+	void update(); // updates camera position based on key pressed booleans
 
 private:
 	int width_;
@@ -43,5 +45,7 @@ private:
 	bool right_pressed_;
 	bool down_pressed_;
 	bool left_pressed_;
+	bool plus_pressed_;
+	bool minus_pressed_;
 };
 

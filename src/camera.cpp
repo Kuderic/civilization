@@ -25,16 +25,45 @@ ofPoint Camera::GetTilePositionAt(int pixel_x, int pixel_y) const {
 	return ofPoint(x, y, 0);
 }
 
+int Camera::GetWidth() const {
+	return width_;
+}
+
+int Camera::GetHeight() const{
+	return height_;
+}
+
 void Camera::SetBoard(const Board* board) {
 	board_ = board;
 }
 
 void Camera::SetHeight(int height) {
+	//Check that height isn't larger than board
+	if (height >= Board::kBoardHeight) {
+		height = Board::kBoardHeight - 1;
+	} else if (height < 1) {
+		height = 1;
+	}
 	height_ = height;
+
+	//Make sure that position + height stays in bounds
+	if (position_.y + height_ >= Board::kBoardHeight) {
+		position_.y = Board::kBoardHeight - height_;
+	}
 }
 
 void Camera::SetWidth(int width) {
+	if (width >= Board::kBoardWidth) {
+		width = Board::kBoardWidth - 1;
+	} else if (width < 1) {
+		width = 1;
+	}
 	width_ = width;
+
+	//Make sure that position + width stays in bounds
+	if (position_.x + width_ >= Board::kBoardWidth) {
+		position_.x = Board::kBoardWidth - width_;
+	}
 }
 
 void Camera::SetPixelHeight(int height) {
@@ -63,6 +92,12 @@ void Camera::KeyPressed(int key) {
 	case OF_KEY_LEFT:
 		left_pressed_ = true;
 		break;
+	case '=':
+		plus_pressed_ = true;
+		break;
+	case '-':
+		minus_pressed_ = true;
+		break;
 	}
 }
 
@@ -79,6 +114,12 @@ void Camera::KeyReleased(int key) {
 		break;
 	case OF_KEY_LEFT:
 		left_pressed_ = false;
+		break;
+	case '=':
+		plus_pressed_ = false;
+		break;
+	case '-':
+		minus_pressed_ = false;
 		break;
 	}
 }
@@ -139,5 +180,13 @@ void Camera::update() {
 	}
 	if (left_pressed_ && position_.x > 0) {
 		position_.x--;
+	}
+
+	if (plus_pressed_) {
+		SetHeight(height_ - 1);
+		SetWidth(width_ - 1);
+	} else if (minus_pressed_) {
+		SetHeight(height_ + 1);
+		SetWidth(width_ + 1);
 	}
 }

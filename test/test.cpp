@@ -253,6 +253,17 @@ TEST_CASE("Camera Default Constructor") {
 
 
 //========================================
+// Task Class Tests
+//========================================
+
+TEST_CASE("Task Default Constructor") {
+	Task task = Task(Task::Type::DIG, ofPoint(0, 0));
+
+	REQUIRE(task.GetPosition() == ofPoint(0, 0));
+	REQUIRE(task.GetType() == Task::Type::DIG);
+}
+
+//========================================
 // A* Pathing Algorithm Tests
 //========================================
 

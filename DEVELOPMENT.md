@@ -198,7 +198,7 @@ It can also be updated if a tile in the path becomes obstructed.
 I will also be adding keybinds to create walls and designate tiles for Entities to path to
 so that I may better test the pathing algorithm in-game.
 
-- [x] A* Pathing
+- [x] A* Pathing algorithm
 	- Found an example of the algorithm online and implemented it into my project
 - [x] Create wall by pressing 'w' (toggle) and clicking
 - [x] Delete wall by pressing 'x' (toggle) and clicking
@@ -225,3 +225,4 @@ If I have extra time I will make a class for my interface.
 	-	Carry items to an area
 - [ ] Build activity
 	-	Construct a wall from an item (resource)
+- [x] Zoom in and out with '+' and '-'

@@ -2,21 +2,25 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	game_state = GameState::PLAY_GAME;
-	click_state = ClickState::NONE;
-
+	ofSetWindowTitle("Dog Fortress");
 	ofBackground(ofColor::black);
 	ofSetFrameRate(kFrameRate);
+	game_state = GameState::PLAY_GAME;
+	click_state = ClickState::NONE;
 
 	Floor::LoadTextures();
 	Wall::LoadTextures();
 	Colonist::LoadTextures();
 	pause_text.load("../../resources/SEA_GARDENS.ttf", 50);
 	interface_text.load("../../resources/SEA_GARDENS.ttf", 20);
+	fps_counter.load("../../resources/SEA_GARDENS.ttf", 15);
+
+	background_music.load("../../resources/background.mp3");
+	background_music.setVolume(70);
+	background_music.play();
 
 	//Board dimensions can be modified in board.h
 	board.setup();
-	//Similarly with camera dimensions.
 	camera.SetBoard(&board);
 }
 
@@ -26,15 +30,10 @@ void ofApp::update() {
 		board.update();
 	}
 	camera.update();
-
-	//Framerate counter
-	std::stringstream stream;
-	stream << "fps: " << ofGetFrameRate();
-	ofSetWindowTitle(stream.str());
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
 	ofSetColor(ofColor::white); //	White color needed to draw images normally
 	camera.draw();
 
@@ -65,6 +64,12 @@ void ofApp::draw(){
 		interface_text.drawString("'d'|Dig Wall", ofGetWindowWidth() - kInterfaceWidth, 90);
 		break;
 	}
+
+	//Update Framerate counter
+	std::stringstream stream;
+	stream << "FPS: " << ofGetFrameRate();
+	ofSetColor(ofColor::white);
+	fps_counter.drawString(stream.str(), ofGetWindowWidth() - kInterfaceWidth, ofGetWindowHeight() - 5);
 }
 
 //--------------------------------------------------------------
@@ -84,6 +89,7 @@ void ofApp::keyPressed(int key){
 			break;
 		}
 	}
+
 	UpdateClickState(key);
 }
 

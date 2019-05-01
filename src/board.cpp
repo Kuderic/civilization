@@ -11,6 +11,10 @@ const std::vector<Entity*>& Board::GetEntities() const {
 	return entities_;
 }
 
+const std::vector<Task>& Board::GetTasks() const {
+	return tasks_;
+}
+
 const Tile* Board::GetTileAt(ofPoint position) const {
 	if (!IsValidTile(position)) {
 		return nullptr;
@@ -65,6 +69,10 @@ void Board::RemoveWall(ofPoint position) {
 		return;
 	}
 	tiles_[position.x][position.y].SetWall(Wall(Wall::Type::EMPTY));
+}
+
+void Board::CreateDigTask(ofPoint position) {
+	Task task = Task(Task::Type::DIG, position);
 }
 
 //Generate gameboard

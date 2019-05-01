@@ -1,5 +1,4 @@
 #include "turn_action.h"
-#pragma once
 
 TurnAction::TurnAction() {
 	action_ = Action::IDLE;

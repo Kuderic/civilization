@@ -16,8 +16,6 @@ public:
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
 	void windowResized(int w, int h);
-	void dragEvent(ofDragInfo dragInfo);
-	void gotMessage(ofMessage msg);
 		
 private:
 	enum class GameState {
@@ -37,9 +35,13 @@ private:
 	ClickState click_state;
 	Board board;
 	Camera camera;
+
 	//Organize this into an interface class maybe
 	ofTrueTypeFont pause_text;
 	ofTrueTypeFont interface_text;
+	ofTrueTypeFont fps_counter;
+	//Music composed by Jamal Green. OST from Equilinox
+	ofSoundPlayer background_music;
 
 	void UpdateClickState(int key);
 	void ParseBoardClick(int x, int y, int button);
