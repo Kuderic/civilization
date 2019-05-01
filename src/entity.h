@@ -25,7 +25,9 @@ protected:
 	ofImage* image_;
 	TurnAction turn_action_;
 
+	//	Store current path. Only update periodically or if a tile in the path becomes a wall.
+	const std::vector<ofPoint> current_path;
+
 private:
 	ofPoint position_;
-
 };

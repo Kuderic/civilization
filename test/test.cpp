@@ -250,3 +250,20 @@ TEST_CASE("Camera Default Constructor") {
 
 	REQUIRE(camera.GetPosition() == ofPoint(0, 0, 0));
 }
+
+
+//========================================
+// A* Pathing Algorithm Tests
+//========================================
+
+TEST_CASE("Basic Pathing Test") {
+	ofSetupOpenGL(1600, 1200, OF_WINDOW);
+	Board board;
+	board.setup();
+
+	std::vector<ofPoint> path = board.GetPath(ofPoint(0, 0), ofPoint(14, 30));
+
+	for (ofPoint p : path) {
+		std::cout << p << std::endl;
+	}
+}

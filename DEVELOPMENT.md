@@ -188,3 +188,20 @@ I just check each wall's neighboring tiles and if at least one neighbor has no w
 I also added a pause option by hitting spacebar.
 
 I have opted to use the A* pathing algorithm rather than Dijkstra's.
+
+### 4/30/19 - A* Pathing
+
+Today I am implementing A* pathing. 
+The path can be stored by an Entity once it is found and only updated occasionally to avoid slowdown.
+It can also be updated if a tile in the path becomes obstructed.
+
+I will also be adding keybinds to create walls and designate tiles for Entities to path to
+so that I may better test the pathing algorithm in-game.
+
+- [ ] A* Pathing
+	- Found an example of the algorithm online and implemented it into my project
+- [ ] Create wall by pressing 'w' (toggle) and clicking
+- [ ] Delete wall by pressing 'x' (toggle) and clicking
+- [ ] Designate tile to move to by pressing 'm' and clicking
+- [ ] Add basic interface to show which action is selected
+- [ ] Only one selection is allowed at a time

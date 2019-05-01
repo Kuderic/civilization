@@ -11,7 +11,7 @@ Then, the dogs will attempt to complete the jobs based on their assigned labors.
 
 The graphics for my game are tileset-based allowing for me to focus on implementing gameplay mechanics and good coding practice.
 
-<img src="https://imgur.com/A5WDH8F" width="800">
+<img src="https://imgur.com/A5WDH8F.png" width="800">
 
 ## Building Dog Fortress
 All the files needed to build **Dog Fortress** can be found in `src`.

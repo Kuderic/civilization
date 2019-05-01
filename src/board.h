@@ -17,6 +17,8 @@ public:
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
 	const std::vector<Entity*>& GetEntities() const;
 	const Tile* GetTileAt(ofPoint position) const;
+
+	const vector<ofPoint> GetPath(const ofPoint start, const ofPoint destination);
 	bool IsSurroundedByWallsAt(ofPoint position) const;
 
 	void setup();
@@ -39,5 +41,30 @@ private:
 	void CreateStone();
 
 	void CreateColonists();
+
+
+	//=======	FOR PATHING ALGORITHM	========
+	// A star algorithm taken from: https://dev.to/jansonsa/a-star-a-path-finding-c-4a4h
+
+	//	Node to star f, g, h values for A* pathing algorithm
+	struct AStarNode {
+		int y;
+		int x;
+		int parent_x;
+		int parent_y;
+		float g_cost;
+		float h_cost;
+		float f_cost;
+
+		bool operator < (const AStarNode& rhs);
+	};
+
+	//	A map to store all AStarNodes
+	std::array<std::array<AStarNode, kBoardHeight>, kBoardWidth> a_star_map;
+
+	void InitAStarMap();
+	vector<ofPoint> MakePath(ofPoint start, ofPoint destination);
+	double CalculateH(ofPoint calculate, ofPoint destination);
+
 };
 
