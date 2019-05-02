@@ -3,6 +3,7 @@
 #pragma once
 
 class Board;
+class Task;
 
 //This is an abstract class
 class Entity
@@ -16,6 +17,7 @@ public:
 	TurnAction& GetTurnAction();
 
 	void SetPosition(const ofPoint position);
+	static void RemoveTask(const Task* task);
 
 	//Pass in a reference to the current board so the entity can update its action
 	virtual void UpdateTurnAction(const Board& board) = 0;
@@ -28,6 +30,7 @@ protected:
 		WALKING,
 		DIGGING
 	};
+	static unordered_map<const Task*, const Entity*> task_map_;
 
 	ofImage* image_;
 	TurnAction turn_action_;

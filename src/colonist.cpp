@@ -31,27 +31,42 @@ void Colonist::UpdateTurnAction(const Board& board) {
 }
 
 Entity::Activity Colonist::GetNewActivity(const Board& board) {
-	std::cout << "Getting new activity: ";
+	std::cout << "=====================" << std::endl;
+	std::cout << "I am doggo " << this << std::endl;
 	const std::vector<Task>& tasks = board.GetTasks();
 	
 	if (tasks.size() == 0) {
-		std::cout << "IDLE" << std::endl;
+		std::cout << "New Activity: IDLE" << std::endl;
 		return Activity::IDLE;
 	}
-	
+
 	//Make activity based on first available task
-	for (Task task : tasks) {
+	for (int i = 0; i < tasks.size(); i++) {
+		const Task& task = tasks[i];
+		std::cout << "Looking at task " << &task << std::endl;
+
+		//If another dog is doing this task, go to the next task
+		auto search = task_map_.find(&task);
+		if (search != task_map_.end()) {
+			if (task_map_[&task] != this) {
+				std::cout << "Another doggo has this task" << std::endl;
+				continue;
+			}
+		}
+
 		switch (task.GetType()) {
-
 		case Task::Type::DIG:
-			//If not next to the wall, try to create a path to a neighboring tile
-			ofPoint wall_position = tasks[0].GetPosition();
+			ofPoint wall_position = task.GetPosition();
+
+			//If not adjacent to wall, try to create a path to a neighboring tile of wall
 			float dist = GetPosition().distance(wall_position);
-
 			if (dist >= 2) {
-				std::vector<ofPoint> neighbors = board.GetNeighborsAt(wall_position);
+				//Get rid of current path
+				std::vector<ofPoint> empty;
+				current_path_ = empty;
 
-				//Try all neighboring tiles until a valid path is found
+				std::vector<ofPoint> neighbors = board.GetEmptyNeighborsAt(wall_position);
+				//Try all empty neighboring tiles until a valid path is found
 				for (ofPoint neighbor : neighbors) {
 					current_path_ = board.GetPath(GetPosition(), neighbor);
 					if (current_path_.size() > 0) {
@@ -59,22 +74,24 @@ Entity::Activity Colonist::GetNewActivity(const Board& board) {
 					}
 				}
 				if (current_path_.size() == 0) {
-					//No path was found to dig wall
+					//No path was found to dig wall. Go to next task
 					break;
 				}
-
-				std::cout << "WALK TO DIG" << std::endl;
+				std::cout << "New Activity: WALKING TO DIG LOCATION" << std::endl;
+				task_map_[&task] = this;
 				return Activity::WALKING;
+
 			} else {
-				std::cout << "DIGGING" << std::endl;
+				std::cout << "New Activity: DIGGING" << std::endl;
 				action_tile_ = task.GetPosition();
+				task_map_[&task] = this;
 				return Activity::DIGGING;
 			}
 		}
 	}
 
 	//No possible task was found => IDLE
-	std::cout << "IDLE (tasks inaccessible)" << std::endl;
+	std::cout << "New Activity: IDLE (tasks inaccessible)" << std::endl;
 	return Activity::IDLE;
 }
 
@@ -84,12 +101,12 @@ TurnAction Colonist::CreateTurnAction(const Board& board) {
 	
 	//Move in random direction
 	case Activity::IDLE:
-		std::cout << "Random move" << std::endl;
+		std::cout << "MOVE (random)" << std::endl;
 		return CreateRandomMove();
 
 	//Move along current_path_
 	case Activity::WALKING:
-		std::cout << "MOVE along path" << std::endl;
+		std::cout << "MOVE (along current_path_)" << std::endl;
 		return CreateNextMove();
 
 	//Digging wall at action_tile_
@@ -102,8 +119,6 @@ TurnAction Colonist::CreateTurnAction(const Board& board) {
 TurnAction Colonist::CreateRandomMove() {
 	int x_rand = (int) ofRandom(-2, 2);
 	int y_rand = (int) ofRandom(-2, 2);
-	std::cout << x_rand << std::endl;
-	std::cout << y_rand << std::endl;
 
 	ofPoint current = GetPosition();
 	ofPoint dest = ofPoint(current.x + x_rand, current.y + y_rand);

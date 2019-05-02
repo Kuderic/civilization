@@ -17,7 +17,7 @@ void ofApp::setup(){
 	fps_counter.load("../../resources/SEA_GARDENS.ttf", 15);
 
 	background_music.load("../../resources/background.mp3");
-	background_music.setVolume(40);
+	background_music.setVolume(.4);
 	background_music.play();
 
 	//Board dimensions can be modified in board.h
@@ -44,7 +44,6 @@ void ofApp::draw() {
 	}
 
 	//	Draw interface
-	//	I know this has magic numbers but I plan to change this completely
 	ofSetColor(ofColor::white);
 	interface_text.drawString("'w'|Create Wall", ofGetWindowWidth() - kInterfaceWidth, 30);
 	interface_text.drawString("'x'|Delete Wall", ofGetWindowWidth() - kInterfaceWidth, 60);
@@ -178,7 +177,7 @@ void ofApp::ParseBoardClick(int x, int y, int button) {
 		break;
 
 	case ClickState::REMOVE_TASK:
-		board.RemoveTask(tile_pos);
+		board.RemoveTaskAt(tile_pos);
 		break;
 	}
 }

@@ -3,6 +3,12 @@
 Board::Board() {
 }
 
+Board::~Board() {
+	for (int i = 0; i < entities_.size(); i++) {
+		delete entities_[i];
+	}
+}
+
 const std::array<std::array<Tile, Board::kBoardHeight>, Board::kBoardWidth>& Board::GetTiles() const {
 	return tiles_;
 }
@@ -22,9 +28,30 @@ const Tile* Board::GetTileAt(ofPoint position) const {
 	return &tiles_[position.x][position.y];
 }
 
+const Task* Board::GetTaskAt(ofPoint position) const {
+	for (int i = 0; i < tasks_.size(); i++) {
+		if (tasks_[i].GetPosition() == position) {
+			return &tasks_[i];
+		}
+	}
+	return nullptr;
+}
+
+const vector<ofPoint> Board::GetEmptyNeighborsAt(const ofPoint position) const {
+	vector<ofPoint> neighbors;
+	for (int dx = -1; dx < 2; dx++) {
+		for (int dy = -1; dy < 2; dy++) {
+			ofPoint neighbor = ofPoint(position.x + dx, position.y + dy);
+			if (IsValidTile(neighbor) && !GetTileAt(neighbor)->HasWall()) {
+				neighbors.push_back(neighbor);
+			}
+		}
+	}
+	return neighbors;
+}
+
 const vector<ofPoint> Board::GetNeighborsAt(const ofPoint position) const {
 	vector<ofPoint> neighbors;
-
 	for (int dx = -1; dx < 2; dx++) {
 		for (int dy = -1; dy < 2; dy++) {
 			ofPoint neighbor = ofPoint(position.x + dx, position.y + dy);
@@ -47,23 +74,14 @@ bool Board::IsValidTile(ofPoint position) const {
 
 //Check the 8 surrounding tiles. If all neighboring tiles have walls, return true
 bool Board::IsSurroundedByWallsAt(ofPoint position) const {
-	int x = position.x;
-	int y = position.y;
+	for (ofPoint neighbor_pos : GetNeighborsAt(position)) {
+		const Tile* neighbor = GetTileAt(neighbor_pos);
 
-	for (int i = x - 1; i < x + 2; i++) {
-		for (int j = y - 1; j < y + 2; j++) {
-			//Skip over self
-			if (i == x && j == y) {
-				continue;
-			}
-			const Tile* neighbor = GetTileAt(ofPoint(i, j));
-
-			//Check that neighbor exists (for edge tiles)
-			if (!neighbor) {
-				continue;
-			} else if (!neighbor->HasWall()) {
-				return false;
-			}
+		//Check that neighbor exists (for edge tiles)
+		if (!neighbor) {
+			continue;
+		} else if (!neighbor->HasWall()) {
+			return false;
 		}
 	}
 	return true;
@@ -87,7 +105,7 @@ void Board::RemoveWall(ofPoint position) {
 
 void Board::CreateDigTask(ofPoint position) {
 	if (!IsValidTile(position)) {
-		std::cout << "Cannot creat dig designation. Tile doesn't exist at " << position << std::endl;
+		std::cout << "Cannot create dig designation. Tile doesn't exist at " << position << std::endl;
 		return;
 	}
 	//Check that wall exists
@@ -108,13 +126,12 @@ void Board::CreateDigTask(ofPoint position) {
 	tasks_.push_back(new_task);
 }
 
-void Board::RemoveTask(ofPoint position) {
+void Board::RemoveTaskAt(ofPoint position) {
 	//Find the task
 	for (int i = 0; i < tasks_.size(); i++) {
 		if (tasks_[i].GetPosition() == position) {
 			std::cout << "Task deleted" << std::endl;
 			tasks_.erase(tasks_.begin() + i); //Note: vector erase is inefficient.
-			//Would be more efficient to store tasks in a 2d array
 			return;
 		}
 	}
@@ -137,7 +154,7 @@ void Board::update() {
 		//Give entity a reference to board so it can decide what to do
 		entity.UpdateTurnAction(*this);
 
-		TurnAction& action = entity.GetTurnAction();
+		const TurnAction& action = entity.GetTurnAction();
 
 		/* Parse TurnAction if complete
 			Note: I handle parsing in Board because board is the only class that has access to everything
@@ -161,7 +178,8 @@ void Board::update() {
 				if (GetTileAt(destination)->HasWall()) {
 					tiles_[destination.x][destination.y].MineWall();
 				}
-				RemoveTask(destination);
+				Entity::RemoveTask(GetTaskAt(destination));
+				RemoveTaskAt(destination);
 				break;
 			}
 		}
@@ -320,7 +338,7 @@ const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint des
 		}
 	}
 	if (destination_found == false) {
-		cout << "Destination not found" << endl;
+		cout << "No path found" << endl;
 		return empty;
 	}
 

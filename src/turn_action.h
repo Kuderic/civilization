@@ -34,6 +34,6 @@ private:
 	const static int kDefaultIncrement = 20;
 	//Max time for various actions
 	const static int kIdleTime = 50;
-	const static int kMoveTime = 300;
-	const static int kDigTime = 1500;
+	const static int kMoveTime = 100;
+	const static int kDigTime = 1000;
 };

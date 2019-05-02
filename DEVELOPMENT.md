@@ -228,3 +228,8 @@ If I have extra time I will make a class for my interface.
 - [x] Added zooming in and out with '+' and '-'
 - [x] Added background music
 - [x] Added way to remove designations
+
+I've noticed that my program slows down a lot if I zoom out since I'm drawing every tile every frame.
+Maybe I can use an FBO to only render tiles that should be updated?
+
+I also had to refactor how my dogs chose their tasks so that they wouldn't repeat.

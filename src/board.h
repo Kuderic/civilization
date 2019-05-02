@@ -14,12 +14,15 @@ public:
 	static const int kBoardHeight = 12 * 3;
 
 	Board();
+	~Board();
 
 	const std::array<std::array<Tile, kBoardHeight>, kBoardWidth>& GetTiles() const;
 	const std::vector<Entity*>& GetEntities() const;
 	const std::vector<Task>& GetTasks() const;
 	const Tile* GetTileAt(const ofPoint position) const;
+	const Task* GetTaskAt(const ofPoint position) const;
 	const vector<ofPoint> GetPath(const ofPoint start, const ofPoint destination) const;
+	const vector<ofPoint> GetEmptyNeighborsAt(const ofPoint position) const;
 	const vector<ofPoint> GetNeighborsAt(const ofPoint position) const;
 
 	bool IsValidTile(ofPoint position) const;
@@ -28,7 +31,7 @@ public:
 	void CreateWall(Wall::Type type, ofPoint position);
 	void RemoveWall(ofPoint position);
 	void CreateDigTask(ofPoint position);
-	void RemoveTask(ofPoint position);
+	void RemoveTaskAt(ofPoint position);
 
 	void setup();
 	void update();
@@ -36,8 +39,8 @@ public:
 
 private:
 	//Generate stone area at setup
-	static const int kStoneGenWidth = 13;
-	static const int kNumColonists = 1;
+	static const int kStoneGenWidth = 19;
+	static const int kNumColonists = 10;
 
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_;
 	std::vector<Entity*> entities_;

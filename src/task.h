@@ -1,6 +1,7 @@
 #include "ofMain.h"
 #pragma once
 
+class Entity;
 class Task {
 public:
 	enum class Type {
