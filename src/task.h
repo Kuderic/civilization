@@ -5,7 +5,8 @@ class Entity;
 class Task {
 public:
 	enum class Type {
-		DIG
+		DIG,
+		BUILD
 	};
 
 	Task(Type type, ofPoint position);
@@ -22,4 +23,5 @@ private:
 
 	//Task textures
 	static ofImage dig;
+	static ofImage build;
 };

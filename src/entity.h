@@ -28,7 +28,8 @@ protected:
 	enum class Activity {
 		IDLE,
 		WALKING,
-		DIGGING
+		DIGGING,
+		BUILDING
 	};
 	static unordered_map<const Task*, const Entity*> task_map_;
 

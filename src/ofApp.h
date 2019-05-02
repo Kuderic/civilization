@@ -27,6 +27,7 @@ private:
 		CREATE_WALL,
 		DELETE_WALL,
 		DIG_TASK,
+		BUILD_TASK,
 		REMOVE_TASK
 	};
 	const static int kInterfaceWidth = 300;	//Pixel width of interface

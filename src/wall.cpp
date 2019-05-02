@@ -58,6 +58,10 @@ void Wall::PlayBreakSound() const {
 			stone_4.play();
 		}
 		break;
+
+	default:
+		stone_1.play();
+		break;
 	}
 }
 

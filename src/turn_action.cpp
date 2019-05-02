@@ -23,6 +23,10 @@ TurnAction::TurnAction(const Action action, const ofPoint target) {
 		case Action::DIG:
 			max_progress_ = kDigTime;
 			break;
+
+		case Action::BUILD:
+			max_progress_ = kBuildTime;
+			break;
 	}
 }
 

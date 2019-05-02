@@ -34,6 +34,7 @@ public:
 	void CreateWall(Wall::Type type, ofPoint position);
 	void RemoveWall(ofPoint position);
 	void CreateDigTask(ofPoint position);
+	void CreateBuildTask(ofPoint position);
 	void RemoveTaskAt(ofPoint position);
 
 	void setup();
@@ -43,10 +44,10 @@ public:
 private:
 	//Generate stone area at setup
 	static const int kStoneGenWidth = 19;
-	static const int kNumColonists = 10;
-	static const int kNumCats = 3;
-	static const int kNumSheep = 4;
-	static const int kNumChickens = 6;
+	static const int kNumColonists = 8;
+	static const int kNumCats = 2;
+	static const int kNumSheep = 2;
+	static const int kNumChickens = 3;
 
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_;
 	std::vector<Entity*> entities_;

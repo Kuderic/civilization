@@ -113,16 +113,31 @@ void Board::CreateDigTask(ofPoint position) {
 		std::cout << "No wall to dig at " << position << std::endl;
 		return;
 	}
-
 	//Check that the position doesn't already have a task
-	for (Task task : tasks_) {
-		if (task.GetPosition() == position) {
-			std::cout << "Task already exists at " << position << std::endl;
-			return;
-		}
+	if (GetTaskAt(position) != nullptr) {
+		std::cout << "Task already exists at " << position << std::endl;
+		return;
 	}
-
 	Task new_task = Task(Task::Type::DIG, position);
+	tasks_.push_back(new_task);
+}
+
+void Board::CreateBuildTask(ofPoint position) {
+	if (!IsValidTile(position)) {
+		std::cout << "Cannot create build designation. Tile doesn't exist at " << position << std::endl;
+		return;
+	}
+	//Check that wall exists
+	if (GetTileAt(position)->HasWall()) {
+		std::cout << "Cannot create build designation. Tile has wall at " << position << std::endl;
+		return;
+	}
+	//Check that the position doesn't already have a task
+	if (GetTaskAt(position) != nullptr) {
+		std::cout << "Task already exists at " << position << std::endl;
+		return;
+	}
+	Task new_task = Task(Task::Type::BUILD, position);
 	tasks_.push_back(new_task);
 }
 
@@ -178,6 +193,15 @@ void Board::update() {
 				//Check that tile has a wall
 				if (GetTileAt(destination)->HasWall()) {
 					tiles_[destination.x][destination.y].MineWall();
+				}
+				Entity::RemoveTask(GetTaskAt(destination));
+				RemoveTaskAt(destination);
+				break;
+
+			case Action::BUILD:
+				//Check that tile has no wall
+				if (!GetTileAt(destination)->HasWall()) {
+					tiles_[destination.x][destination.y].SetWall(Wall(Wall::Type::WOOD_PLANKS));
 				}
 				Entity::RemoveTask(GetTaskAt(destination));
 				RemoveTaskAt(destination);

@@ -52,7 +52,8 @@ void ofApp::draw() {
 	interface_text.drawString("'w'|Create Wall", ofGetWindowWidth() - kInterfaceWidth, 30);
 	interface_text.drawString("'x'|Delete Wall", ofGetWindowWidth() - kInterfaceWidth, 60);
 	interface_text.drawString("'d'|Dig Wall", ofGetWindowWidth() - kInterfaceWidth, 90);
-	interface_text.drawString("'r'|Remove Task", ofGetWindowWidth() - kInterfaceWidth, 120);
+	interface_text.drawString("'b'|Build Wall", ofGetWindowWidth() - kInterfaceWidth, 120);
+	interface_text.drawString("'r'|Remove Task", ofGetWindowWidth() - kInterfaceWidth, 150);
 
 	//Draw currently selected action in yellow
 	ofSetColor(ofColor::yellow);
@@ -60,17 +61,17 @@ void ofApp::draw() {
 	case ClickState::CREATE_WALL:
 		interface_text.drawString("'w'|Create Wall", ofGetWindowWidth() - kInterfaceWidth, 30);
 		break;
-
 	case ClickState::DELETE_WALL:
 		interface_text.drawString("'x'|Delete Wall", ofGetWindowWidth() - kInterfaceWidth, 60);
 		break;
-
 	case ClickState::DIG_TASK:
 		interface_text.drawString("'d'|Dig Wall", ofGetWindowWidth() - kInterfaceWidth, 90);
 		break;
-
+	case ClickState::BUILD_TASK:
+		interface_text.drawString("'b'|Build Wall", ofGetWindowWidth() - kInterfaceWidth, 120);
+		break;
 	case ClickState::REMOVE_TASK:
-		interface_text.drawString("'r'|Remove Task", ofGetWindowWidth() - kInterfaceWidth, 120);
+		interface_text.drawString("'r'|Remove Task", ofGetWindowWidth() - kInterfaceWidth, 150);
 		break;
 	}
 
@@ -153,6 +154,15 @@ void ofApp::UpdateClickState(int key) {
 		}
 		break;
 
+	case 'b':
+		if (click_state == ClickState::BUILD_TASK) {
+			click_state = ClickState::NONE;
+		}
+		else {
+			click_state = ClickState::BUILD_TASK;
+		}
+		break;
+
 	case 'r':
 		if (click_state == ClickState::REMOVE_TASK) {
 			click_state = ClickState::NONE;
@@ -178,6 +188,10 @@ void ofApp::ParseBoardClick(int x, int y, int button) {
 
 	case ClickState::DIG_TASK:
 		board.CreateDigTask(tile_pos);
+		break;
+
+	case ClickState::BUILD_TASK:
+		board.CreateBuildTask(tile_pos);
 		break;
 
 	case ClickState::REMOVE_TASK:

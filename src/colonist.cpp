@@ -54,12 +54,15 @@ Entity::Activity Colonist::GetNewActivity(const Board& board) {
 			}
 		}
 
+		ofPoint wall_position;
+		float dist;
+
 		switch (task.GetType()) {
 		case Task::Type::DIG:
-			ofPoint wall_position = task.GetPosition();
+			wall_position = task.GetPosition();
 
 			//If not adjacent to wall, try to create a path to a neighboring tile of wall
-			float dist = GetPosition().distance(wall_position);
+			dist = GetPosition().distance(wall_position);
 			if (dist >= 2) {
 				//Get rid of current path
 				std::vector<ofPoint> empty;
@@ -87,6 +90,40 @@ Entity::Activity Colonist::GetNewActivity(const Board& board) {
 				task_map_[&task] = this;
 				return Activity::DIGGING;
 			}
+			break;
+
+		case Task::Type::BUILD:
+			wall_position = task.GetPosition();
+
+			//If not adjacent to build spot, try to create a path to a neighboring tile of wall
+			dist = GetPosition().distance(wall_position);
+			if (dist >= 2) {
+				//Get rid of current path
+				std::vector<ofPoint> empty;
+				current_path_ = empty;
+
+				std::vector<ofPoint> neighbors = board.GetEmptyNeighborsAt(wall_position);
+				for (ofPoint neighbor : neighbors) {
+					current_path_ = board.GetPath(GetPosition(), neighbor);
+					if (current_path_.size() > 0) {
+						break;
+					}
+				}
+				if (current_path_.size() == 0) {
+					break;
+				}
+				//std::cout << "New Activity: WALKING TO DIG LOCATION" << std::endl;
+				task_map_[&task] = this;
+				return Activity::WALKING;
+
+			}
+			else {
+				//std::cout << "New Activity: DIGGING" << std::endl;
+				action_tile_ = task.GetPosition();
+				task_map_[&task] = this;
+				return Activity::BUILDING;
+			}
+			break;
 		}
 	}
 
@@ -113,6 +150,11 @@ TurnAction Colonist::CreateTurnAction(const Board& board) {
 	case Activity::DIGGING:
 		//std::cout << "DIGGING" << std::endl;
 		return TurnAction(Action::DIG, action_tile_);
+
+	//Building wall at action_tile_
+	case Activity::BUILDING:
+		//std::cout << "DIGGING" << std::endl;
+		return TurnAction(Action::BUILD, action_tile_);
 	}
 }
 

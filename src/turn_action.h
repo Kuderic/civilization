@@ -36,4 +36,5 @@ private:
 	const static int kIdleTime = 50;
 	const static int kMoveTime = 100;
 	const static int kDigTime = 1000;
+	const static int kBuildTime = 1000;
 };
