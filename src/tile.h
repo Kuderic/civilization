@@ -13,6 +13,7 @@ public:
 
 	void SetFloor(const Floor& floor);
 	void SetWall(const Wall& wall);
+	void MineWall();
 
 	bool HasWall() const;
 

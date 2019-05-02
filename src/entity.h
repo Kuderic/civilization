@@ -34,7 +34,8 @@ protected:
 	Activity activity_;
 
 	//	Store current path. Only update periodically or if a tile in the path becomes a wall.
-	const std::vector<ofPoint> current_path;
+	std::vector<ofPoint> current_path_;
+	ofPoint action_tile_; //Tile to perform action on
 
 private:
 	ofPoint position_;

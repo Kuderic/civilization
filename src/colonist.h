@@ -18,4 +18,5 @@ private:
 	Entity::Activity GetNewActivity(const Board& board);
 	TurnAction CreateTurnAction(const Board& board);
 	TurnAction CreateRandomMove();
+	TurnAction CreateNextMove();
 };

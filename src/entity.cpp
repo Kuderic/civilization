@@ -5,6 +5,7 @@ Entity::Entity() {
 	image_ = nullptr;
 	turn_action_ = TurnAction();
 	activity_ = Activity::IDLE;
+	action_tile_ = ofPoint(0, 0);
 }
 
 Entity::Entity(const ofPoint position) {
@@ -12,6 +13,7 @@ Entity::Entity(const ofPoint position) {
 	image_ = nullptr;
 	turn_action_ = TurnAction();
 	activity_ = Activity::IDLE;
+	action_tile_ = ofPoint(0, 0);
 }
 
 const ofPoint Entity::GetPosition() const {

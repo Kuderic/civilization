@@ -22,6 +22,20 @@ const Tile* Board::GetTileAt(ofPoint position) const {
 	return &tiles_[position.x][position.y];
 }
 
+const vector<ofPoint> Board::GetNeighborsAt(const ofPoint position) const {
+	vector<ofPoint> neighbors;
+
+	for (int dx = -1; dx < 2; dx++) {
+		for (int dy = -1; dy < 2; dy++) {
+			ofPoint neighbor = ofPoint(position.x + dx, position.y + dy);
+			if (IsValidTile(neighbor)) {
+				neighbors.push_back(neighbor);
+			}
+		}
+	}
+	return neighbors;
+}
+
 bool Board::IsValidTile(ofPoint position) const {
 	if (position.x < 0 || position.x >= kBoardWidth
 		|| position.y < 0 || position.y >= kBoardHeight) {
@@ -109,8 +123,6 @@ void Board::RemoveTask(ofPoint position) {
 
 //Generate gameboard
 void Board::setup() {
-	InitAStarMap();
-
 	GenerateTiles();
 	CreateGrass();
 	CreateStone();
@@ -131,10 +143,10 @@ void Board::update() {
 			Note: I handle parsing in Board because board is the only class that has access to everything
 			E.g. if action is digging a wall, board can remove the wall when action is complete*/
 		if (action.IsComplete()) {
-			switch (action.GetAction()) {
+			ofPoint destination = action.GetTarget();
 
+			switch (action.GetAction()) {
 			case Action::MOVE:
-				ofPoint destination = action.GetTarget();
 				//Check that tile is on the board and isn't a wall
 				if (IsValidTile(destination) &&
 					!GetTileAt(destination)->HasWall()) {
@@ -142,6 +154,15 @@ void Board::update() {
 				} else {
 					std::cout << "Entity did not move; invalid move tile" << std::endl;
 				}
+				break;
+
+			case Action::DIG:
+				//Check that tile has a wall
+				if (GetTileAt(destination)->HasWall()) {
+					tiles_[destination.x][destination.y].MineWall();
+				}
+				RemoveTask(destination);
+				break;
 			}
 		}
 	}
@@ -191,22 +212,7 @@ bool Board::AStarNode::operator < (const AStarNode& rhs) {
 	return this->f_cost < rhs.f_cost;
 }
 
-void Board::InitAStarMap() {
-	//Initialize a_star_map
-	for (int x = 0; x < kBoardWidth; x++) {
-		for (int y = 0; y < kBoardHeight; y++) {
-			a_star_map[x][y].f_cost = FLT_MAX;
-			a_star_map[x][y].g_cost = FLT_MAX;
-			a_star_map[x][y].h_cost = FLT_MAX;
-			a_star_map[x][y].parent_x = -1;
-			a_star_map[x][y].parent_y = -1;
-			a_star_map[x][y].x = x;
-			a_star_map[x][y].y = y;
-		}
-	}
-}
-
-const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint destination) {
+const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint destination) const {
 	using namespace std;
 	vector<ofPoint> empty;
 
@@ -220,6 +226,20 @@ const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint des
 	}
 
 	bool closed_list[kBoardWidth][kBoardHeight] = { false };
+
+	std::array<std::array<AStarNode, kBoardHeight>, kBoardWidth> a_star_map;
+	//Initialize a_star_map
+	for (int x = 0; x < kBoardWidth; x++) {
+		for (int y = 0; y < kBoardHeight; y++) {
+			a_star_map[x][y].f_cost = FLT_MAX;
+			a_star_map[x][y].g_cost = FLT_MAX;
+			a_star_map[x][y].h_cost = FLT_MAX;
+			a_star_map[x][y].parent_x = -1;
+			a_star_map[x][y].parent_y = -1;
+			a_star_map[x][y].x = x;
+			a_star_map[x][y].y = y;
+		}
+	}
 
 	//Initialize our starting list
 	int x = start.x;
@@ -275,7 +295,7 @@ const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint des
 						a_star_map[neighbor_x][neighbor_y].parent_x = x;
 						a_star_map[neighbor_x][neighbor_y].parent_y = y;
 						destination_found = true;
-						return MakePath(start, destination);
+						return MakePath(start, destination, a_star_map);
 					}
 
 					else if (closed_list[neighbor_x][neighbor_y] == false) {
@@ -306,7 +326,8 @@ const std::vector<ofPoint> Board::GetPath(const ofPoint start, const ofPoint des
 
 }
 
-vector<ofPoint> Board::MakePath(ofPoint start, ofPoint destination) {
+vector<ofPoint> Board::MakePath(ofPoint start, ofPoint destination,
+	std::array<std::array<AStarNode, kBoardHeight>, kBoardWidth> a_star_map) const {
 	try {
 		cout << "Found a path" << endl;
 		int x = destination.x;
@@ -332,6 +353,8 @@ vector<ofPoint> Board::MakePath(ofPoint start, ofPoint destination) {
 
 			usable_path.emplace_back(top_position);
 		}
+		//Now reverse the list so that pathing runtime is faster
+		std::reverse(usable_path.begin(), usable_path.end());
 		return usable_path;
 	}
 	catch (const exception& e) {
@@ -340,7 +363,7 @@ vector<ofPoint> Board::MakePath(ofPoint start, ofPoint destination) {
 }
 
 //Calculate distance from "calculate" to destination for heuristic
-double Board::CalculateH(ofPoint calculate, ofPoint destination) {
+double Board::CalculateH(ofPoint calculate, ofPoint destination) const {
 	double H = (sqrt((calculate.x - destination.x)*(calculate.x - destination.x)
 		+ (calculate.y - destination.y)*(calculate.y - destination.y)));
 	return H;

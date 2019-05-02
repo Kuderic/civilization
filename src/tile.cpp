@@ -21,6 +21,12 @@ void Tile::SetWall(const Wall& wall) {
 	wall_ = wall;
 }
 
+void Tile::MineWall() {
+	wall_.DropItem();
+	wall_.PlayBreakSound();
+	SetWall(Wall(Wall::Type::EMPTY));
+}
+
 bool Tile::HasWall() const {
 	return wall_.GetType() != Wall::Type::EMPTY;
 }

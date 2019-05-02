@@ -220,7 +220,7 @@ If I have extra time I will make a class for my interface.
 - [x] Activity enum
 - [x] Idle activity
 	-	Walk in a random direction if no tasks
-- [ ] Dig activity
+- [x] Dig activity
 - [ ] Haul activity
 	-	Carry items to an area
 - [ ] Build activity

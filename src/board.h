@@ -19,7 +19,8 @@ public:
 	const std::vector<Entity*>& GetEntities() const;
 	const std::vector<Task>& GetTasks() const;
 	const Tile* GetTileAt(const ofPoint position) const;
-	const vector<ofPoint> GetPath(const ofPoint start, const ofPoint destination);
+	const vector<ofPoint> GetPath(const ofPoint start, const ofPoint destination) const;
+	const vector<ofPoint> GetNeighborsAt(const ofPoint position) const;
 
 	bool IsValidTile(ofPoint position) const;
 	bool IsSurroundedByWallsAt(ofPoint position) const;
@@ -66,12 +67,9 @@ private:
 		bool operator < (const AStarNode& rhs);
 	};
 
-	//	A map to store all AStarNodes
-	std::array<std::array<AStarNode, kBoardHeight>, kBoardWidth> a_star_map;
-
-	void InitAStarMap();
-	vector<ofPoint> MakePath(ofPoint start, ofPoint destination);
-	double CalculateH(ofPoint calculate, ofPoint destination);
+	vector<ofPoint> MakePath(ofPoint start, ofPoint destination,
+		std::array<std::array<AStarNode, kBoardHeight>, kBoardWidth> a_star_map) const;
+	double CalculateH(ofPoint calculate, ofPoint destination) const;
 
 };
 

@@ -17,7 +17,7 @@ void ofApp::setup(){
 	fps_counter.load("../../resources/SEA_GARDENS.ttf", 15);
 
 	background_music.load("../../resources/background.mp3");
-	background_music.setVolume(70);
+	background_music.setVolume(40);
 	background_music.play();
 
 	//Board dimensions can be modified in board.h
