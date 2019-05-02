@@ -8,9 +8,13 @@ void ofApp::setup(){
 	game_state = GameState::PLAY_GAME;
 	click_state = ClickState::NONE;
 
+	//Load resources
 	Floor::LoadTextures();
 	Wall::LoadTextures();
 	Colonist::LoadTextures();
+	Cat::LoadTextures();
+	Sheep::LoadTextures();
+	Chicken::LoadTextures();
 	Task::LoadTextures();
 	pause_text.load("../../resources/SEA_GARDENS.ttf", 50);
 	interface_text.load("../../resources/SEA_GARDENS.ttf", 20);

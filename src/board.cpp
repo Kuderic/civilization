@@ -145,6 +145,7 @@ void Board::setup() {
 	CreateStone();
 
 	CreateColonists();
+	CreateAnimals();
 }
 
 void Board::update() {
@@ -219,6 +220,21 @@ void Board::CreateColonists() {
 	for (int i = 0; i < kNumColonists; i++) {
 		Colonist* colonist = new Colonist(ofPoint(i, 0, 0));
 		entities_.push_back(colonist);
+	}
+}
+
+void Board::CreateAnimals() {
+	for (int i = 0; i < kNumCats; i++) {
+		Cat* cat = new Cat(ofPoint(i, 0, 0));
+		entities_.push_back(cat);
+	}
+	for (int i = 0; i < kNumSheep; i++) {
+		Sheep* not_cat = new Sheep(ofPoint(i, 0, 0));
+		entities_.push_back(not_cat);
+	}
+	for (int i = 0; i < kNumChickens; i++) {
+		Chicken* not_cat = new Chicken(ofPoint(i, 0, 0));
+		entities_.push_back(not_cat);
 	}
 }
 

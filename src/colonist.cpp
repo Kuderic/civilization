@@ -31,25 +31,25 @@ void Colonist::UpdateTurnAction(const Board& board) {
 }
 
 Entity::Activity Colonist::GetNewActivity(const Board& board) {
-	std::cout << "=====================" << std::endl;
-	std::cout << "I am doggo " << this << std::endl;
+	//std::cout << "=====================" << std::endl;
+	//std::cout << "I am doggo " << this << std::endl;
 	const std::vector<Task>& tasks = board.GetTasks();
 	
 	if (tasks.size() == 0) {
-		std::cout << "New Activity: IDLE" << std::endl;
+		//std::cout << "New Activity: IDLE" << std::endl;
 		return Activity::IDLE;
 	}
 
 	//Make activity based on first available task
 	for (int i = 0; i < tasks.size(); i++) {
 		const Task& task = tasks[i];
-		std::cout << "Looking at task " << &task << std::endl;
+		//std::cout << "Looking at task " << &task << std::endl;
 
 		//If another dog is doing this task, go to the next task
 		auto search = task_map_.find(&task);
 		if (search != task_map_.end()) {
 			if (task_map_[&task] != this) {
-				std::cout << "Another doggo has this task" << std::endl;
+				//std::cout << "Another doggo has this task" << std::endl;
 				continue;
 			}
 		}
@@ -77,12 +77,12 @@ Entity::Activity Colonist::GetNewActivity(const Board& board) {
 					//No path was found to dig wall. Go to next task
 					break;
 				}
-				std::cout << "New Activity: WALKING TO DIG LOCATION" << std::endl;
+				//std::cout << "New Activity: WALKING TO DIG LOCATION" << std::endl;
 				task_map_[&task] = this;
 				return Activity::WALKING;
 
 			} else {
-				std::cout << "New Activity: DIGGING" << std::endl;
+				//std::cout << "New Activity: DIGGING" << std::endl;
 				action_tile_ = task.GetPosition();
 				task_map_[&task] = this;
 				return Activity::DIGGING;
@@ -91,27 +91,27 @@ Entity::Activity Colonist::GetNewActivity(const Board& board) {
 	}
 
 	//No possible task was found => IDLE
-	std::cout << "New Activity: IDLE (tasks inaccessible)" << std::endl;
+	//std::cout << "New Activity: IDLE (tasks inaccessible)" << std::endl;
 	return Activity::IDLE;
 }
 
 TurnAction Colonist::CreateTurnAction(const Board& board) {
-	std::cout << "Creating new TurnAction: ";
+	//std::cout << "Creating new TurnAction: ";
 	switch (activity_) {
 	
 	//Move in random direction
 	case Activity::IDLE:
-		std::cout << "MOVE (random)" << std::endl;
+		//std::cout << "MOVE (random)" << std::endl;
 		return CreateRandomMove();
 
 	//Move along current_path_
 	case Activity::WALKING:
-		std::cout << "MOVE (along current_path_)" << std::endl;
+		//std::cout << "MOVE (along current_path_)" << std::endl;
 		return CreateNextMove();
 
 	//Digging wall at action_tile_
 	case Activity::DIGGING:
-		std::cout << "DIGGING" << std::endl;
+		//std::cout << "DIGGING" << std::endl;
 		return TurnAction(Action::DIG, action_tile_);
 	}
 }

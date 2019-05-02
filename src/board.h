@@ -1,7 +1,10 @@
 #include "ofMain.h"
 #include "tile.h"
-#include "colonist.h"
 #include "task.h"
+#include "colonist.h"
+#include "cat.h"
+#include "sheep.h"
+#include "chicken.h"
 
 #include <vector>
 
@@ -41,6 +44,9 @@ private:
 	//Generate stone area at setup
 	static const int kStoneGenWidth = 19;
 	static const int kNumColonists = 10;
+	static const int kNumCats = 3;
+	static const int kNumSheep = 4;
+	static const int kNumChickens = 6;
 
 	std::array<std::array<Tile, kBoardHeight>, kBoardWidth> tiles_;
 	std::vector<Entity*> entities_;
@@ -52,6 +58,7 @@ private:
 	void CreateStone();
 
 	void CreateColonists();
+	void CreateAnimals();
 
 
 	//=======	FOR PATHING ALGORITHM	========
