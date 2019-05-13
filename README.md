@@ -20,6 +20,7 @@ giving the game many graphical variations. Here are examples of what Dwarf Fortr
 
 Here are some screenshots from my current progress on Dog Fortress:
 <img src="http://i.imgur.com/uU3u40X.png" width="800">
+
 [Click here to see gameplay.](https://i.imgur.com/2hiCD0c.gifv)
 
 ## Features
