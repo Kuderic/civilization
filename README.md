@@ -27,30 +27,30 @@ Here are some screenshots from my current progress on Dog Fortress:
 Some planned and completed features to give a general idea of what I will attempt to do:
 
 Features:
-[x] Keyboard-based UI with mouse support
-[x] Colonists
-  [ ] Health, weight, age, walk-speed, skills, clothes and items
-  [ ] Body parts with individualized health (highly optional)
+- [x] Keyboard-based UI with mouse support
+- [x] Colonists
+  - [ ] Health, weight, age, walk-speed, skills, clothes and items
+  - [ ] Body parts with individualized health (highly optional)
     * i.e. Damaged legs would affect walk speed
-[x] Other Animals
-[x] Mining walls
-[x] Building walls
-[x] Sounds for actions
-[x] Pretty background music
-[x] Pathing algorithm for units (A* algorithm).
-[x] Camera controls, zoom in-out, pause
-[ ] Procedural or random terrain generation
-[ ] Resources that can be crafted or used in constructions
-[ ] Skills system
+- [x] Other Animals
+- [x] Mining walls
+- [x] Building walls
+- [x] Sounds for actions
+- [x] Pretty background music
+- [x] Pathing algorithm for units (A* algorithm).
+- [x] Camera controls, zoom in-out, pause
+- [ ] Procedural or random terrain generation
+- [ ] Resources that can be crafted or used in constructions
+- [ ] Skills system
   * i.e. Mining raises mining skill, which affects mining speed
-[ ] Z-levels (up-down axis). Each tile (cube) would contain a wall and floor.
+- [ ] Z-levels (up-down axis). Each tile (cube) would contain a wall and floor.
   * Can only view one level at a time.
-[ ] Basic combat system
-[ ] A labor manager to designate which jobs each colony member is allowed to perform
-[ ] Hunt/milk/shear/capture animals
-[ ] Hunger/thirst system for colonists
-[ ] Planting crops for harvest
-[ ] Sleeping in beds
+- [ ] Basic combat system
+- [ ] A labor manager to designate which jobs each colony member is allowed to perform
+- [ ] Hunt/milk/shear/capture animals
+- [ ] Hunger/thirst system for colonists
+- [ ] Planting crops for harvest
+- [ ] Sleeping in beds
 
 ## Updates
 Read DEVELOPMENT.md for updates on my progress. 
